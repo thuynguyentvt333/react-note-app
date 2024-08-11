@@ -1,0 +1,616 @@
+{
+  "accounts": [
+    {
+      "id": "1",
+      "username": "john_doe",
+      "email": "john.doe@example.com",
+      "password": "1234567890",
+      "avatar": "",
+      "gender": "Male"
+    },
+    {
+      "id": "2",
+      "username": "jane_smith",
+      "email": "jane.smith@example.com",
+      "password": "1234567890",
+      "avatar": "",
+      "gender": "Female"
+    },
+    {
+      "id": "3",
+      "username": "alex_jones",
+      "email": "alex.jones@example.com",
+      "password": "1234567890",
+      "avatar": "",
+      "gender": "Male"
+    },
+    {
+      "id": "4",
+      "username": "taylor_lee",
+      "email": "taylor.lee@example.com",
+      "password": "1234567890",
+      "avatar": "",
+      "gender": "Female"
+    },
+    {
+      "id": "2e6d",
+      "email": "tuan@gmail.com",
+      "password": "123"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "account_id": 1,
+      "title": "Task 1",
+      "description": "Description of Task 1",
+      "created_at": "2024-08-01",
+      "updated_at": "2024-08-01",
+      "priority_id": 1,
+      "status_id": 1,
+      "parent_id": null,
+      "group_id": 1,
+      "start_date": "2024-08-01",
+      "end_date": "2024-08-05",
+      "start_time": "09:00",
+      "end_time": "17:00"
+    },
+    {
+      "id": "2",
+      "account_id": 2,
+      "title": "Task 2",
+      "description": "Description of Task 2",
+      "created_at": "2024-08-02",
+      "updated_at": "2024-08-02",
+      "priority_id": 2,
+      "status_id": 2,
+      "parent_id": null,
+      "group_id": 3,
+      "start_date": "2024-08-02",
+      "end_date": "2024-08-06",
+      "start_time": "10:00",
+      "end_time": "18:00"
+    },
+    {
+      "id": "3",
+      "account_id": 3,
+      "title": "Task 3",
+      "description": "Description of Task 3",
+      "created_at": "2024-08-03",
+      "updated_at": "2024-08-03",
+      "priority_id": 3,
+      "status_id": 3,
+      "parent_id": null,
+      "group_id": null,
+      "start_date": "2024-08-03",
+      "end_date": "2024-08-07",
+      "start_time": "11:00",
+      "end_time": "19:00"
+    },
+    {
+      "id": "4",
+      "account_id": 4,
+      "title": "Task 4",
+      "description": "Description of Task 4",
+      "created_at": "2024-08-04",
+      "updated_at": "2024-08-04",
+      "priority_id": 1,
+      "status_id": 1,
+      "parent_id": null,
+      "group_id": null,
+      "start_date": "2024-08-04",
+      "end_date": "2024-08-08",
+      "start_time": "12:00",
+      "end_time": "20:00"
+    },
+    {
+      "id": "5",
+      "account_id": 1,
+      "title": "Task 5",
+      "description": "Description of Task 5",
+      "created_at": "2024-08-05",
+      "updated_at": "2024-08-05",
+      "priority_id": 2,
+      "status_id": 2,
+      "parent_id": null,
+      "group_id": 1,
+      "start_date": "2024-08-05",
+      "end_date": "2024-08-09",
+      "start_time": "13:00",
+      "end_time": "21:00"
+    },
+    {
+      "id": "6",
+      "account_id": 2,
+      "title": "Task 6",
+      "description": "Description of Task 6",
+      "created_at": "2024-08-06",
+      "updated_at": "2024-08-06",
+      "priority_id": 3,
+      "status_id": 3,
+      "parent_id": null,
+      "group_id": 3,
+      "start_date": "2024-08-06",
+      "end_date": "2024-08-10",
+      "start_time": "14:00",
+      "end_time": "22:00"
+    },
+    {
+      "id": "7",
+      "account_id": 3,
+      "title": "Task 7",
+      "description": "Description of Task 7",
+      "created_at": "2024-08-07",
+      "updated_at": "2024-08-07",
+      "priority_id": 1,
+      "status_id": 1,
+      "parent_id": null,
+      "group_id": null,
+      "start_date": "2024-08-07",
+      "end_date": "2024-08-11",
+      "start_time": "15:00",
+      "end_time": "23:00"
+    },
+    {
+      "id": "8",
+      "account_id": 4,
+      "title": "Task 8",
+      "description": "Description of Task 8",
+      "created_at": "2024-08-08",
+      "updated_at": "2024-08-08",
+      "priority_id": 2,
+      "status_id": 2,
+      "parent_id": null,
+      "group_id": null,
+      "start_date": "2024-08-08",
+      "end_date": "2024-08-12",
+      "start_time": "16:00",
+      "end_time": "00:00"
+    },
+    {
+      "id": "9",
+      "account_id": 1,
+      "title": "Task 9",
+      "description": "Description of Task 9",
+      "created_at": "2024-08-09",
+      "updated_at": "2024-08-09",
+      "priority_id": 3,
+      "status_id": 3,
+      "parent_id": null,
+      "group_id": 1,
+      "start_date": "2024-08-09",
+      "end_date": "2024-08-13",
+      "start_time": "17:00",
+      "end_time": "01:00"
+    },
+    {
+      "id": "10",
+      "account_id": 2,
+      "title": "Task 10",
+      "description": "Description of Task 10",
+      "created_at": "2024-08-10",
+      "updated_at": "2024-08-10",
+      "priority_id": 1,
+      "status_id": 1,
+      "parent_id": null,
+      "group_id": 3,
+      "start_date": "2024-08-10",
+      "end_date": "2024-08-14",
+      "start_time": "18:00",
+      "end_time": "02:00"
+    },
+    {
+      "id": "11",
+      "account_id": 3,
+      "title": "Task 11",
+      "description": "Description of Task 11",
+      "created_at": "2024-08-11",
+      "updated_at": "2024-08-11",
+      "priority_id": 2,
+      "status_id": 2,
+      "parent_id": 1,
+      "group_id": null,
+      "start_date": "2024-08-11",
+      "end_date": "2024-08-15",
+      "start_time": "19:00",
+      "end_time": "03:00"
+    },
+    {
+      "id": "12",
+      "account_id": 4,
+      "title": "Task 12",
+      "description": "Description of Task 12",
+      "created_at": "2024-08-12",
+      "updated_at": "2024-08-12",
+      "priority_id": 3,
+      "status_id": 3,
+      "parent_id": 1,
+      "group_id": null,
+      "start_date": "2024-08-12",
+      "end_date": "2024-08-16",
+      "start_time": "20:00",
+      "end_time": "04:00"
+    },
+    {
+      "id": "13",
+      "account_id": 1,
+      "title": "Task 13",
+      "description": "Description of Task 13",
+      "created_at": "2024-08-13",
+      "updated_at": "2024-08-13",
+      "priority_id": 1,
+      "status_id": 1,
+      "parent_id": 1,
+      "group_id": 1,
+      "start_date": "2024-08-13",
+      "end_date": "2024-08-17",
+      "start_time": "21:00",
+      "end_time": "05:00"
+    },
+    {
+      "id": "14",
+      "account_id": 2,
+      "title": "Task 14",
+      "description": "Description of Task 14",
+      "created_at": "2024-08-14",
+      "updated_at": "2024-08-14",
+      "priority_id": 2,
+      "status_id": 2,
+      "parent_id": null,
+      "group_id": 3,
+      "start_date": "2024-08-14",
+      "end_date": "2024-08-18",
+      "start_time": "22:00",
+      "end_time": "06:00"
+    },
+    {
+      "id": "15",
+      "account_id": 3,
+      "title": "Task 15",
+      "description": "Description of Task 15",
+      "created_at": "2024-08-15",
+      "updated_at": "2024-08-15",
+      "priority_id": 3,
+      "status_id": 3,
+      "parent_id": 2,
+      "group_id": null,
+      "start_date": "2024-08-15",
+      "end_date": "2024-08-19",
+      "start_time": "23:00",
+      "end_time": "07:00"
+    },
+    {
+      "id": "16",
+      "account_id": 4,
+      "title": "Task 16",
+      "description": "Description of Task 16",
+      "created_at": "2024-08-16",
+      "updated_at": "2024-08-16",
+      "priority_id": 1,
+      "status_id": 1,
+      "parent_id": 2,
+      "group_id": null,
+      "start_date": "2024-08-16",
+      "end_date": "2024-08-20",
+      "start_time": "00:00",
+      "end_time": "08:00"
+    },
+    {
+      "id": "17",
+      "account_id": 1,
+      "title": "Task 17",
+      "description": "Description of Task 17",
+      "created_at": "2024-08-17",
+      "updated_at": "2024-08-17",
+      "priority_id": 2,
+      "status_id": 2,
+      "parent_id": 3,
+      "group_id": 1,
+      "start_date": "2024-08-17",
+      "end_date": "2024-08-21",
+      "start_time": "01:00",
+      "end_time": "09:00"
+    },
+    {
+      "id": "18",
+      "account_id": 2,
+      "title": "Task 18",
+      "description": "Description of Task 18",
+      "created_at": "2024-08-18",
+      "updated_at": "2024-08-18",
+      "priority_id": 3,
+      "status_id": 3,
+      "parent_id": null,
+      "group_id": 3,
+      "start_date": "2024-08-18",
+      "end_date": "2024-08-22",
+      "start_time": "02:00",
+      "end_time": "10:00"
+    },
+    {
+      "id": "19",
+      "account_id": 3,
+      "title": "Task 19",
+      "description": "Description of Task 19",
+      "created_at": "2024-08-19",
+      "updated_at": "2024-08-19",
+      "priority_id": 1,
+      "status_id": 1,
+      "parent_id": 3,
+      "group_id": null,
+      "start_date": "2024-08-19",
+      "end_date": "2024-08-23",
+      "start_time": "03:00",
+      "end_time": "11:00"
+    },
+    {
+      "id": "20",
+      "account_id": 4,
+      "title": "Task 20",
+      "description": "Description of Task 20",
+      "created_at": "2024-08-20",
+      "updated_at": "2024-08-20",
+      "priority_id": 2,
+      "status_id": 2,
+      "parent_id": 3,
+      "group_id": null,
+      "start_date": "2024-08-20",
+      "end_date": "2024-08-24",
+      "start_time": "04:00",
+      "end_time": "12:00"
+    }
+  ],
+  "notes": [
+    {
+      "id": "1",
+      "account_id": 1,
+      "title": "Note 1",
+      "content": "Content of Note 1",
+      "created_at": "2024-08-01",
+      "updated_at": "2024-08-01",
+      "group_id": 1
+    },
+    {
+      "id": "2",
+      "account_id": 2,
+      "title": "Note 2",
+      "content": "Content of Note 2",
+      "created_at": "2024-08-02",
+      "updated_at": "2024-08-02",
+      "group_id": 3
+    },
+    {
+      "id": "3",
+      "account_id": 3,
+      "title": "Note 3",
+      "content": "Content of Note 3",
+      "created_at": "2024-08-03",
+      "updated_at": "2024-08-03",
+      "group_id": null
+    },
+    {
+      "id": "4",
+      "account_id": 4,
+      "title": "Note 4",
+      "content": "Content of Note 4",
+      "created_at": "2024-08-04",
+      "updated_at": "2024-08-04",
+      "group_id": null
+    },
+    {
+      "id": "5",
+      "account_id": 1,
+      "title": "Note 5",
+      "content": "Content of Note 5",
+      "created_at": "2024-08-05",
+      "updated_at": "2024-08-05",
+      "group_id": 1
+    },
+    {
+      "id": "6",
+      "account_id": 2,
+      "title": "Note 6",
+      "content": "Content of Note 6",
+      "created_at": "2024-08-06",
+      "updated_at": "2024-08-06",
+      "group_id": 3
+    },
+    {
+      "id": "7",
+      "account_id": 3,
+      "title": "Note 7",
+      "content": "Content of Note 7",
+      "created_at": "2024-08-07",
+      "updated_at": "2024-08-07",
+      "group_id": null
+    },
+    {
+      "id": "8",
+      "account_id": 4,
+      "title": "Note 8",
+      "content": "Content of Note 8",
+      "created_at": "2024-08-08",
+      "updated_at": "2024-08-08",
+      "group_id": null
+    },
+    {
+      "id": "9",
+      "account_id": 1,
+      "title": "Note 9",
+      "content": "Content of Note 9",
+      "created_at": "2024-08-09",
+      "updated_at": "2024-08-09",
+      "group_id": 1
+    },
+    {
+      "id": "10",
+      "account_id": 2,
+      "title": "Note 10",
+      "content": "Content of Note 10",
+      "created_at": "2024-08-10",
+      "updated_at": "2024-08-10",
+      "group_id": 3
+    },
+    {
+      "id": "11",
+      "account_id": 3,
+      "title": "Note 11",
+      "content": "Content of Note 11",
+      "created_at": "2024-08-11",
+      "updated_at": "2024-08-11",
+      "group_id": null
+    },
+    {
+      "id": "12",
+      "account_id": 4,
+      "title": "Note 12",
+      "content": "Content of Note 12",
+      "created_at": "2024-08-12",
+      "updated_at": "2024-08-12",
+      "group_id": null
+    },
+    {
+      "id": "13",
+      "account_id": 1,
+      "title": "Note 13",
+      "content": "Content of Note 13",
+      "created_at": "2024-08-13",
+      "updated_at": "2024-08-13",
+      "group_id": 1
+    },
+    {
+      "id": "14",
+      "account_id": 2,
+      "title": "Note 14",
+      "content": "Content of Note 14",
+      "created_at": "2024-08-14",
+      "updated_at": "2024-08-14",
+      "group_id": 3
+    },
+    {
+      "id": "15",
+      "account_id": 3,
+      "title": "Note 15",
+      "content": "Content of Note 15",
+      "created_at": "2024-08-15",
+      "updated_at": "2024-08-15",
+      "group_id": null
+    },
+    {
+      "id": "16",
+      "account_id": 4,
+      "title": "Note 16",
+      "content": "Content of Note 16",
+      "created_at": "2024-08-16",
+      "updated_at": "2024-08-16",
+      "group_id": null
+    },
+    {
+      "id": "17",
+      "account_id": 1,
+      "title": "Note 17",
+      "content": "Content of Note 17",
+      "created_at": "2024-08-17",
+      "updated_at": "2024-08-17",
+      "group_id": 1
+    },
+    {
+      "id": "18",
+      "account_id": 2,
+      "title": "Note 18",
+      "content": "Content of Note 18",
+      "created_at": "2024-08-18",
+      "updated_at": "2024-08-18",
+      "group_id": 3
+    },
+    {
+      "id": "19",
+      "account_id": 3,
+      "title": "Note 19",
+      "content": "Content of Note 19",
+      "created_at": "2024-08-19",
+      "updated_at": "2024-08-19",
+      "group_id": null
+    },
+    {
+      "id": "20",
+      "account_id": 4,
+      "title": "Note 20",
+      "content": "Content of Note 20",
+      "created_at": "2024-08-20",
+      "updated_at": "2024-08-20",
+      "group_id": null
+    }
+  ],
+  "item_connections": [
+    {
+      "id": "1",
+      "task_id": 1,
+      "note_id": 1,
+      "account_id": 1
+    },
+    {
+      "id": "2",
+      "task_id": 1,
+      "note_id": 3,
+      "account_id": 1
+    },
+    {
+      "id": "3",
+      "task_id": 2,
+      "note_id": 2,
+      "account_id": 2
+    },
+    {
+      "id": "4",
+      "task_id": 2,
+      "note_id": 4,
+      "account_id": 2
+    }
+  ],
+  "priority": [
+    {
+      "id": "1",
+      "name": "High"
+    },
+    {
+      "id": "2",
+      "name": "Medium"
+    },
+    {
+      "id": "3",
+      "name": "Low"
+    }
+  ],
+  "status": [
+    {
+      "id": "1",
+      "name": "Todo"
+    },
+    {
+      "id": "2",
+      "name": "Doing"
+    },
+    {
+      "id": "3",
+      "name": "Done"
+    }
+  ],
+  "groups": [
+    {
+      "id": "1",
+      "name": "Work 1",
+      "account_id": 1
+    },
+    {
+      "id": "2",
+      "name": "Work 2",
+      "account_id": 1
+    },
+    {
+      "id": "3",
+      "name": "Work 3",
+      "account_id": 2
+    }
+  ]
+}
