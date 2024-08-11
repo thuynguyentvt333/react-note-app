@@ -28,7 +28,7 @@ const Login = () =>  {
       if (accounts.length > 0) {
         setSuccess('Login successful!');
         setError('');
-        navigate('/');
+        navigate('/home');
       } else {
         setError('Invalid email or password');
         setSuccess('');

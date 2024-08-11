@@ -3,8 +3,8 @@
     {
       "id": "1",
       "username": "john_doe",
-      "email": "john.doe@example.com",
-      "password": "1234567890",
+      "email": "a@gmail.com",
+      "password": "123",
       "avatar": "",
       "gender": "Male"
     },

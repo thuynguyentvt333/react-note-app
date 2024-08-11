@@ -9,18 +9,19 @@ import TaskPage from '../pages/TaskPage/TaskPage';
 import NotePage from '../pages/NotePage/NotePage';
 
 const PublicRouter = () => {
-
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      
+      <Route element={<Layout />}>
+        <Route path="/home" element={<Home />} />
         <Route path="/tasks" element={<TaskPage />} />
         <Route path="/notes" element={<NotePage />} />
         <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Layout>
+      </Route>
+    </Routes>
   );
 };
 
