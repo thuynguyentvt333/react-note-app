@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import PrivateLayout from '../layouts/PrivateLayout';
@@ -9,10 +9,9 @@ import { AuthContext } from '../contexts/AuthContext';
 
 const PrivateRouter = () => {
   const { user } = useContext(AuthContext);
-  const location = useLocation();
 
   if (!user) {
-    return <Navigate to="/login" state={{ from: location }} />;
+    return <Navigate to="/login" replace />;
   }
 
   return (

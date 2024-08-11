@@ -1,15 +1,16 @@
 import React, { createContext, useState, useEffect } from 'react';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
-      setUser(parsedUser);
+      setUser(JSON.parse(storedUser));
     }
   }, []);
 
@@ -22,6 +23,14 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem('user');
   };
+
+  const handleLoadingFinish = () => {
+    setIsLoading(false);
+  };
+
+  if (isLoading) {
+    return <LoadingSpinner duration={1000} onFinish={handleLoadingFinish} />;
+  }
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>

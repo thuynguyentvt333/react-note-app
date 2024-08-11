@@ -11,9 +11,9 @@ const PublicRouter = () => {
   return (
     <PublicLayout>
       <Routes>
-        <Route path="/login" element={user ? <Navigate to="/app/home" /> : <Login />} />
-        <Route path="/register" element={user ? <Navigate to="/app/home" /> : <Register />} />
-        <Route path="*" element={<Navigate to={user ? "/app/home" : "/login"} />} />
+        <Route path="/login" element={user ? <Navigate to="/app/home" replace /> : <Login />} />
+        <Route path="/register" element={user ? <Navigate to="/app/home" replace /> : <Register />} />
+        <Route path="*" element={<Navigate to={user ? "/app/home" : "/login"} replace />} />
       </Routes>
     </PublicLayout>
   );
