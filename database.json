@@ -1,15 +1,15 @@
 {
   "accounts": [
     {
-      "id": "1",
+      "id": 1,
       "username": "john_doe",
-      "email": "a@gmail.com",
-      "password": "123",
+      "email": "john.doe@example.com",
+      "password": "1234567890",
       "avatar": "",
       "gender": "Male"
     },
     {
-      "id": "2",
+      "id": 2,
       "username": "jane_smith",
       "email": "jane.smith@example.com",
       "password": "1234567890",
@@ -17,7 +17,7 @@
       "gender": "Female"
     },
     {
-      "id": "3",
+      "id": 3,
       "username": "alex_jones",
       "email": "alex.jones@example.com",
       "password": "1234567890",
@@ -25,22 +25,17 @@
       "gender": "Male"
     },
     {
-      "id": "4",
+      "id": 4,
       "username": "taylor_lee",
       "email": "taylor.lee@example.com",
       "password": "1234567890",
       "avatar": "",
       "gender": "Female"
-    },
-    {
-      "id": "2e6d",
-      "email": "tuan@gmail.com",
-      "password": "123"
     }
   ],
   "tasks": [
     {
-      "id": "1",
+      "id": 1,
       "account_id": 1,
       "title": "Task 1",
       "description": "Description of Task 1",
@@ -56,7 +51,7 @@
       "end_time": "17:00"
     },
     {
-      "id": "2",
+      "id": 2,
       "account_id": 2,
       "title": "Task 2",
       "description": "Description of Task 2",
@@ -72,7 +67,7 @@
       "end_time": "18:00"
     },
     {
-      "id": "3",
+      "id": 3,
       "account_id": 3,
       "title": "Task 3",
       "description": "Description of Task 3",
@@ -88,7 +83,7 @@
       "end_time": "19:00"
     },
     {
-      "id": "4",
+      "id": 4,
       "account_id": 4,
       "title": "Task 4",
       "description": "Description of Task 4",
@@ -104,7 +99,7 @@
       "end_time": "20:00"
     },
     {
-      "id": "5",
+      "id": 5,
       "account_id": 1,
       "title": "Task 5",
       "description": "Description of Task 5",
@@ -120,7 +115,7 @@
       "end_time": "21:00"
     },
     {
-      "id": "6",
+      "id": 6,
       "account_id": 2,
       "title": "Task 6",
       "description": "Description of Task 6",
@@ -136,7 +131,7 @@
       "end_time": "22:00"
     },
     {
-      "id": "7",
+      "id": 7,
       "account_id": 3,
       "title": "Task 7",
       "description": "Description of Task 7",
@@ -152,7 +147,7 @@
       "end_time": "23:00"
     },
     {
-      "id": "8",
+      "id": 8,
       "account_id": 4,
       "title": "Task 8",
       "description": "Description of Task 8",
@@ -168,7 +163,7 @@
       "end_time": "00:00"
     },
     {
-      "id": "9",
+      "id": 9,
       "account_id": 1,
       "title": "Task 9",
       "description": "Description of Task 9",
@@ -184,7 +179,7 @@
       "end_time": "01:00"
     },
     {
-      "id": "10",
+      "id": 10,
       "account_id": 2,
       "title": "Task 10",
       "description": "Description of Task 10",
@@ -200,7 +195,7 @@
       "end_time": "02:00"
     },
     {
-      "id": "11",
+      "id": 11,
       "account_id": 3,
       "title": "Task 11",
       "description": "Description of Task 11",
@@ -216,7 +211,7 @@
       "end_time": "03:00"
     },
     {
-      "id": "12",
+      "id": 12,
       "account_id": 4,
       "title": "Task 12",
       "description": "Description of Task 12",
@@ -232,7 +227,7 @@
       "end_time": "04:00"
     },
     {
-      "id": "13",
+      "id": 13,
       "account_id": 1,
       "title": "Task 13",
       "description": "Description of Task 13",
@@ -248,7 +243,7 @@
       "end_time": "05:00"
     },
     {
-      "id": "14",
+      "id": 14,
       "account_id": 2,
       "title": "Task 14",
       "description": "Description of Task 14",
@@ -264,7 +259,7 @@
       "end_time": "06:00"
     },
     {
-      "id": "15",
+      "id": 15,
       "account_id": 3,
       "title": "Task 15",
       "description": "Description of Task 15",
@@ -280,7 +275,7 @@
       "end_time": "07:00"
     },
     {
-      "id": "16",
+      "id": 16,
       "account_id": 4,
       "title": "Task 16",
       "description": "Description of Task 16",
@@ -296,7 +291,7 @@
       "end_time": "08:00"
     },
     {
-      "id": "17",
+      "id": 17,
       "account_id": 1,
       "title": "Task 17",
       "description": "Description of Task 17",
@@ -312,7 +307,7 @@
       "end_time": "09:00"
     },
     {
-      "id": "18",
+      "id": 18,
       "account_id": 2,
       "title": "Task 18",
       "description": "Description of Task 18",
@@ -328,7 +323,7 @@
       "end_time": "10:00"
     },
     {
-      "id": "19",
+      "id": 19,
       "account_id": 3,
       "title": "Task 19",
       "description": "Description of Task 19",
@@ -344,7 +339,7 @@
       "end_time": "11:00"
     },
     {
-      "id": "20",
+      "id": 20,
       "account_id": 4,
       "title": "Task 20",
       "description": "Description of Task 20",
@@ -362,7 +357,7 @@
   ],
   "notes": [
     {
-      "id": "1",
+      "id": 1,
       "account_id": 1,
       "title": "Note 1",
       "content": "Content of Note 1",
@@ -371,7 +366,7 @@
       "group_id": 1
     },
     {
-      "id": "2",
+      "id": 2,
       "account_id": 2,
       "title": "Note 2",
       "content": "Content of Note 2",
@@ -380,7 +375,7 @@
       "group_id": 3
     },
     {
-      "id": "3",
+      "id": 3,
       "account_id": 3,
       "title": "Note 3",
       "content": "Content of Note 3",
@@ -389,7 +384,7 @@
       "group_id": null
     },
     {
-      "id": "4",
+      "id": 4,
       "account_id": 4,
       "title": "Note 4",
       "content": "Content of Note 4",
@@ -398,7 +393,7 @@
       "group_id": null
     },
     {
-      "id": "5",
+      "id": 5,
       "account_id": 1,
       "title": "Note 5",
       "content": "Content of Note 5",
@@ -407,7 +402,7 @@
       "group_id": 1
     },
     {
-      "id": "6",
+      "id": 6,
       "account_id": 2,
       "title": "Note 6",
       "content": "Content of Note 6",
@@ -416,7 +411,7 @@
       "group_id": 3
     },
     {
-      "id": "7",
+      "id": 7,
       "account_id": 3,
       "title": "Note 7",
       "content": "Content of Note 7",
@@ -425,7 +420,7 @@
       "group_id": null
     },
     {
-      "id": "8",
+      "id": 8,
       "account_id": 4,
       "title": "Note 8",
       "content": "Content of Note 8",
@@ -434,7 +429,7 @@
       "group_id": null
     },
     {
-      "id": "9",
+      "id": 9,
       "account_id": 1,
       "title": "Note 9",
       "content": "Content of Note 9",
@@ -443,7 +438,7 @@
       "group_id": 1
     },
     {
-      "id": "10",
+      "id": 10,
       "account_id": 2,
       "title": "Note 10",
       "content": "Content of Note 10",
@@ -452,7 +447,7 @@
       "group_id": 3
     },
     {
-      "id": "11",
+      "id": 11,
       "account_id": 3,
       "title": "Note 11",
       "content": "Content of Note 11",
@@ -461,7 +456,7 @@
       "group_id": null
     },
     {
-      "id": "12",
+      "id": 12,
       "account_id": 4,
       "title": "Note 12",
       "content": "Content of Note 12",
@@ -470,7 +465,7 @@
       "group_id": null
     },
     {
-      "id": "13",
+      "id": 13,
       "account_id": 1,
       "title": "Note 13",
       "content": "Content of Note 13",
@@ -479,7 +474,7 @@
       "group_id": 1
     },
     {
-      "id": "14",
+      "id": 14,
       "account_id": 2,
       "title": "Note 14",
       "content": "Content of Note 14",
@@ -488,7 +483,7 @@
       "group_id": 3
     },
     {
-      "id": "15",
+      "id": 15,
       "account_id": 3,
       "title": "Note 15",
       "content": "Content of Note 15",
@@ -497,7 +492,7 @@
       "group_id": null
     },
     {
-      "id": "16",
+      "id": 16,
       "account_id": 4,
       "title": "Note 16",
       "content": "Content of Note 16",
@@ -506,7 +501,7 @@
       "group_id": null
     },
     {
-      "id": "17",
+      "id": 17,
       "account_id": 1,
       "title": "Note 17",
       "content": "Content of Note 17",
@@ -515,7 +510,7 @@
       "group_id": 1
     },
     {
-      "id": "18",
+      "id": 18,
       "account_id": 2,
       "title": "Note 18",
       "content": "Content of Note 18",
@@ -524,7 +519,7 @@
       "group_id": 3
     },
     {
-      "id": "19",
+      "id": 19,
       "account_id": 3,
       "title": "Note 19",
       "content": "Content of Note 19",
@@ -533,7 +528,7 @@
       "group_id": null
     },
     {
-      "id": "20",
+      "id": 20,
       "account_id": 4,
       "title": "Note 20",
       "content": "Content of Note 20",
@@ -544,25 +539,25 @@
   ],
   "item_connections": [
     {
-      "id": "1",
+      "id": 1,
       "task_id": 1,
       "note_id": 1,
       "account_id": 1
     },
     {
-      "id": "2",
+      "id": 2,
       "task_id": 1,
       "note_id": 3,
       "account_id": 1
     },
     {
-      "id": "3",
+      "id": 3,
       "task_id": 2,
       "note_id": 2,
       "account_id": 2
     },
     {
-      "id": "4",
+      "id": 4,
       "task_id": 2,
       "note_id": 4,
       "account_id": 2
@@ -570,45 +565,45 @@
   ],
   "priority": [
     {
-      "id": "1",
+      "id": 1,
       "name": "High"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Medium"
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Low"
     }
   ],
   "status": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Todo"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Doing"
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Done"
     }
   ],
   "groups": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Work 1",
       "account_id": 1
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Work 2",
       "account_id": 1
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Work 3",
       "account_id": 2
     }

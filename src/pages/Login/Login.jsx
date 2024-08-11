@@ -1,44 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import {
   Button, Form, FormGroup, Label, Input, Container, Row, Col, Card, CardBody, CardTitle, Alert
 } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Login = () =>  {
 
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const handleLogin = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/accounts', {
-        params: {
-          email: email,
-          password: password
-        }
-      });
+const handleLogin = async () => {
+  if (!email || !password) {
+    setError('Please enter both email and password');
+    setSuccess('');
+    return;
+  }
 
-      const accounts = response.data;
-
-      if (accounts.length > 0) {
-        setSuccess('Login successful!');
-        setError('');
-        navigate('/home');
-      } else {
-        setError('Invalid email or password');
-        setSuccess('');
+  try {
+    const response = await axios.get('http://localhost:5000/accounts', {
+      params: {
+        email: email
       }
-    } catch (error) {
-      console.error('There was an error logging in!', error);
-      setError('An error occurred during login');
+    });
+
+    const accounts = response.data;
+
+    const user = accounts.find(account => account.password === password);
+
+    if (user) {
+      login(user);
+      navigate('/app/home');
+    } else {
+      setError('Invalid email or password');
       setSuccess('');
     }
-  };
+  } catch (error) {
+    console.error('There was an error logging in!', error);
+    setError('An error occurred during login');
+    setSuccess('');
+  }
+};
 
   return (
     <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>

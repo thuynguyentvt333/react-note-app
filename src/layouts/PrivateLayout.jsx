@@ -1,10 +1,9 @@
 import React from 'react';
-
-import './Layout.css';
+import './PrivateLayout.css';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 
-const Layout = ({ children }) => {
+const PrivateLayout = ({ children }) => {
     return (
         <div className="layout-container">
             <Sidebar />
@@ -18,4 +17,4 @@ const Layout = ({ children }) => {
     );
 };
 
-export default Layout;
+export default PrivateLayout;

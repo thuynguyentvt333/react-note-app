@@ -3,28 +3,51 @@
     background-color: #333;
     color: white;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #444;
+    border-radius: 5px;
+}
+
+.user-icon {
+    margin-right: 10px;
+    color: white;
 }
 
 .sidebar ul {
     list-style-type: none;
     padding: 0;
+    flex-grow: 1;
 }
 
 .sidebar li {
     margin: 15px 0;
 }
 
-.sidebar a {
+.sidebar a, .logout-button {
     color: white;
     text-decoration: none;
     display: flex;
     align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 100%;
+    text-align: left;
 }
 
-.sidebar a:hover {
+.sidebar a:hover, .logout-button:hover {
     color: #ddd;
 }
 
-.sidebar a svg {
+.sidebar a svg, .logout-button svg {
     margin-right: 10px;
 }
