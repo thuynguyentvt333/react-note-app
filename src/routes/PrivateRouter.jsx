@@ -6,6 +6,7 @@ import PrivateLayout from '../layouts/PrivateLayout';
 import TaskPage from '../pages/TaskPage/TaskPage';
 import NotePage from '../pages/NotePage/NotePage';
 import { AuthContext } from '../contexts/AuthContext';
+import GroupPage from '../pages/GroupPage/GroupPage';
 
 const PrivateRouter = () => {
   const { user } = useContext(AuthContext);
@@ -18,6 +19,7 @@ const PrivateRouter = () => {
     <PrivateLayout>
       <Routes>
         <Route path="/home" element={<Home />} />
+        <Route path="/group" element={<GroupPage />} />
         <Route path="/tasks" element={<TaskPage />} />
         <Route path="/notes" element={<NotePage />} />
         <Route path="*" element={<NotFound />} />

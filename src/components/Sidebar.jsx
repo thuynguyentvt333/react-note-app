@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaHome, FaInfoCircle, FaStickyNote, FaTasks, FaCog, FaUser, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaInfoCircle, FaStickyNote, FaTasks, FaCog, FaUser, FaSignOutAlt, FaLayerGroup } from 'react-icons/fa';
 import { AuthContext } from '../contexts/AuthContext';
 import './Sidebar.css';
 
@@ -28,8 +28,8 @@ const Sidebar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/app/about">
-                            <FaInfoCircle /> About
+                        <Link to="/app/group">
+                            <FaLayerGroup /> Group
                         </Link>
                     </li>
                     <li>
@@ -40,11 +40,6 @@ const Sidebar = () => {
                     <li>
                         <Link to="/app/tasks">
                             <FaTasks /> Task
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/app/settings">
-                            <FaCog /> Setting
                         </Link>
                     </li>
                     <li>
