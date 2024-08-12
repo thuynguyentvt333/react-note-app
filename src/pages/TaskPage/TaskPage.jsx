@@ -2,24 +2,125 @@ import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Table, InputGroup, Input, Button } from 'reactstrap';
-import { FaSort, FaSearch, FaPlus, FaTasks } from 'react-icons/fa';
+import { FaSort, FaSearch, FaPlus, FaTasks, FaTrash, FaEdit } from 'react-icons/fa';
+import TaskDetailModal from './TaskDetailModal'; 
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 import './TaskPage.scss';
+import { useNavigate } from 'react-router-dom';
 
 const TaskPage = () => {
     const { user } = useContext(AuthContext);
     const [tasks, setTasks] = useState([]);
+    const [filteredTasks, setFilteredTasks] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedTasks, setSelectedTasks] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [deleteMultiple, setDeleteMultiple] = useState(false);
+    const [selectedTask, setSelectedTask] = useState(null);
+    const navigate = useNavigate();
+
+    const statusMap = {
+        1: 'Todo',
+        2: 'Doing',
+        3: 'Done'
+    };
 
     useEffect(() => {
         if (user) {
+            fetchTasks();
+        }
+    }, [user]);
+
+    const fetchTasks = () => {
         axios.get(`http://localhost:5000/tasks?account_id=${user.id}`)
             .then(response => {
                 setTasks(response.data);
-        })
+                setFilteredTasks(response.data);
+            })
             .catch(error => {
                 console.error('Error fetching tasks:', error);
             });
+    };
+
+    const toggleModal = () => setModalOpen(!modalOpen);
+    const toggleDeleteModal = () => setDeleteModalOpen(!deleteModalOpen);
+
+    const handleNewTask = () => {
+        navigate('/app/tasks/new');
+    };
+
+    const handleEditTask = (task) => {
+        navigate(`/app/tasks/edit/${task.id}`);
+    };
+
+    const handleViewTask = (task) => {
+        setSelectedTask(task);
+        toggleModal();
+    };
+
+    const handleDeleteTask = (task) => {
+        setSelectedTask(task);
+        setDeleteMultiple(false);
+        toggleDeleteModal();
+    };
+
+    const confirmDeleteTask = () => {
+        if (deleteMultiple) {
+            axios.all(selectedTasks.map(taskId => axios.delete(`http://localhost:5000/tasks/${taskId}`)))
+                .then(() => {
+                    fetchTasks();
+                    toggleDeleteModal();
+                    setSelectedTasks([]);
+                })
+                .catch(error => {
+                    console.error('Error deleting tasks:', error);
+                });
+        } else {
+            axios.delete(`http://localhost:5000/tasks/${selectedTask.id}`)
+                .then(() => {
+                    fetchTasks();
+                    toggleDeleteModal();
+                })
+                .catch(error => {
+                    console.error('Error deleting task:', error);
+                });
         }
-    }, [user]);
+    };
+
+    const handleSearch = (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        setSearchTerm(searchTerm);
+        if (searchTerm === '') {
+            setFilteredTasks(tasks);
+        } else {
+            const filtered = tasks.filter(task =>
+                task.title.toLowerCase().includes(searchTerm)
+            );
+            setFilteredTasks(filtered);
+        }
+    };
+
+    const handleSelectTask = (taskId) => {
+        if (selectedTasks.includes(taskId)) {
+            setSelectedTasks(selectedTasks.filter(id => id !== taskId));
+        } else {
+            setSelectedTasks([...selectedTasks, taskId]);
+        }
+    };
+
+    const handleSelectAllTasks = () => {
+        if (selectedTasks.length === filteredTasks.length) {
+            setSelectedTasks([]);
+        } else {
+            setSelectedTasks(filteredTasks.map(task => task.id));
+        }
+    };
+
+    const handleDeleteMultipleTasks = () => {
+        setDeleteMultiple(true);
+        toggleDeleteModal();
+    };
 
     return (
         <div className="task-page">
@@ -27,17 +128,27 @@ const TaskPage = () => {
                 <h3>Task List</h3>
                 <div className="task-controls">
                     <div className='controls-left'>
-                        <FaTasks />
-                        All tasks
+                        <Button color="primary" onClick={handleSelectAllTasks}>
+                            <FaTasks /> {selectedTasks.length === filteredTasks.length ? 'Unselect All' : 'All Tasks'}
+                        </Button>
+                        {selectedTasks.length > 0 && (
+                            <Button color="danger" className="delete-multiple-button" onClick={handleDeleteMultipleTasks}>
+                                <FaTrash /> Delete Selected
+                            </Button>
+                        )}
                     </div>
                     <div className='controls-right'>
                         <InputGroup className="search-bar">
-                            <Input placeholder="Search tasks..." />
+                            <Input
+                                placeholder="Search tasks..."
+                                value={searchTerm}
+                                onChange={handleSearch}
+                            />
                             <Button>
-                            <FaSearch />
+                                <FaSearch />
                             </Button>
                         </InputGroup>
-                        <Button color="primary" className="new-task-button">
+                        <Button color="primary" className="new-task-button" onClick={handleNewTask}>
                             <FaPlus /> New
                         </Button>
                     </div>
@@ -45,33 +156,57 @@ const TaskPage = () => {
             </div>
             <Table className="task-table" hover>
                 <thead>
-                <tr>
-                    <th>Status <FaSort /></th>
-                    <th>Task Name <FaSort /></th>
-                    <th>Description <FaSort /></th>
-                    <th>Priority <FaSort /></th>
-                </tr>
+                    <tr>
+                        <th><input type="checkbox" onChange={handleSelectAllTasks} checked={selectedTasks.length === filteredTasks.length} /></th>
+                        <th>Status <FaSort /></th>
+                        <th>Task Name <FaSort /></th>
+                        <th>Description <FaSort /></th>
+                        <th>Priority <FaSort /></th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {tasks.map(task => (
-                    <tr key={task.id}>
-                    <td><input type="checkbox" /></td>
-                    <td>{task.title}</td>
-                    <td>{task.description}</td>
-                    <td>
-                        <span className={task.priority_id === 1 ? 'high' : task.priority_id === 2 ? 'medium' : 'low'}>
-                            {task.priority_id === 1 ? 'High' : task.priority_id === 2 ? 'Medium' : 'Low'}
-                        </span>
-                    </td>
-                    </tr>
-                ))}
+                    {filteredTasks.map(task => (
+                        <tr key={task.id}>
+                            <td><input type="checkbox" checked={selectedTasks.includes(task.id)} onChange={(e) => { e.stopPropagation(); handleSelectTask(task.id); }} /></td>
+                            <td onClick={() => handleViewTask(task)} style={{ cursor: 'pointer' }}>{statusMap[task.status_id]}</td>
+                            <td onClick={() => handleViewTask(task)} style={{ cursor: 'pointer' }}>{task.title}</td>
+                            <td onClick={() => handleViewTask(task)} style={{ cursor: 'pointer' }}>{task.description}</td>
+                            <td onClick={() => handleViewTask(task)} style={{ cursor: 'pointer' }}>
+                                <span className={task.priority_id === 1 ? 'high' : task.priority_id === 2 ? 'medium' : 'low'}>
+                                    {task.priority_id === 1 ? 'High' : task.priority_id === 2 ? 'Medium' : 'Low'}
+                                </span>
+                            </td>
+                            <td className='action'>
+                                <Button size="sm" color="info" className="action-button" onClick={() => handleEditTask(task)}>
+                                    <FaEdit />
+                                </Button>
+                                <Button size="sm" color="danger" className="action-button" onClick={() => handleDeleteTask(task)}>
+                                    <FaTrash />
+                                </Button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </Table>
             <div className="task-footer">
-                <span>Count {tasks.length}</span>
+                <span>Count {filteredTasks.length}</span>
             </div>
+
+            <TaskDetailModal
+                isOpen={modalOpen}
+                toggle={toggleModal}
+                task={selectedTask}
+            />
+
+            <DeleteConfirmationModal
+                isOpen={deleteModalOpen}
+                toggle={toggleDeleteModal}
+                onConfirm={confirmDeleteTask}
+                multiple={deleteMultiple}
+            />
         </div>
     );
-}
+};
 
 export default TaskPage;

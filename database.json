@@ -163,22 +163,6 @@
       "end_time": "00:00"
     },
     {
-      "id": "9",
-      "account_id": 1,
-      "title": "Task 9",
-      "description": "Description of Task 9",
-      "created_at": "2024-08-09",
-      "updated_at": "2024-08-09",
-      "priority_id": 3,
-      "status_id": 3,
-      "parent_id": null,
-      "group_id": 1,
-      "start_date": "2024-08-09",
-      "end_date": "2024-08-13",
-      "start_time": "17:00",
-      "end_time": "01:00"
-    },
-    {
       "id": "10",
       "account_id": 2,
       "title": "Task 10",
@@ -225,22 +209,6 @@
       "end_date": "2024-08-16",
       "start_time": "20:00",
       "end_time": "04:00"
-    },
-    {
-      "id": "13",
-      "account_id": 1,
-      "title": "Task 13",
-      "description": "Description of Task 13",
-      "created_at": "2024-08-13",
-      "updated_at": "2024-08-13",
-      "priority_id": 1,
-      "status_id": 1,
-      "parent_id": 1,
-      "group_id": 1,
-      "start_date": "2024-08-13",
-      "end_date": "2024-08-17",
-      "start_time": "21:00",
-      "end_time": "05:00"
     },
     {
       "id": "14",
@@ -291,22 +259,6 @@
       "end_time": "08:00"
     },
     {
-      "id": "17",
-      "account_id": 1,
-      "title": "Task 17",
-      "description": "Description of Task 17",
-      "created_at": "2024-08-17",
-      "updated_at": "2024-08-17",
-      "priority_id": 2,
-      "status_id": 2,
-      "parent_id": 3,
-      "group_id": 1,
-      "start_date": "2024-08-17",
-      "end_date": "2024-08-21",
-      "start_time": "01:00",
-      "end_time": "09:00"
-    },
-    {
       "id": "18",
       "account_id": 2,
       "title": "Task 18",
@@ -353,6 +305,32 @@
       "end_date": "2024-08-24",
       "start_time": "04:00",
       "end_time": "12:00"
+    },
+    {
+      "id": "dca7",
+      "title": "việc 1",
+      "description": "kkkkkkkkkkkkkkkk",
+      "status_id": 1,
+      "priority_id": 2,
+      "group_id": null,
+      "parent_id": null,
+      "start_date": "2024-08-22",
+      "end_date": "2024-08-24",
+      "start_time": "06:35",
+      "end_time": "06:37"
+    },
+    {
+      "title": "gggggg",
+      "description": "mô tả..................",
+      "status_id": 2,
+      "priority_id": 1,
+      "group_id": "1",
+      "parent_id": null,
+      "start_date": "2024-09-06",
+      "end_date": "2024-09-07",
+      "start_time": "06:40",
+      "end_time": "07:42",
+      "id": "c7b4"
     }
   ],
   "notes": [
