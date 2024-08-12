@@ -504,10 +504,10 @@
       "id": "17",
       "account_id": 1,
       "title": "Note 17",
-      "content": "Content of Note 17",
+      "content": "nội dung .........",
       "created_at": "2024-08-17",
       "updated_at": "2024-08-17",
-      "group_id": 1
+      "group_id": "1"
     },
     {
       "id": "18",

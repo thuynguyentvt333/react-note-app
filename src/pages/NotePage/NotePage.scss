@@ -17,12 +17,21 @@
             .controls-left {
                 display: flex;
                 align-items: center;
-                gap: 10px;
+                gap: 10px; /* Khoảng cách giữa các nút */
                 min-width: 100px;
                 font-size: 18px;
                 font-weight: 500;
-                cursor: pointer;
-                
+
+                .btn {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                }
+
+                .delete-multiple-button {
+                    margin-left: 10px;
+                }
+
                 &:hover {
                     color: #007bff;
                 }
