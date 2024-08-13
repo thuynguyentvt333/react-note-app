@@ -1,41 +1,42 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import {
-  Button, Form, FormGroup, Label, Input, Container, Row, Col, Card, CardBody, CardTitle, Alert
+    Button, Form, FormGroup, Input, Container, Card, CardBody, CardTitle, Alert
 } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
+import './Login.scss';
+import img_login from '../../assets/images/img_login.jpg';
 
 const Login = () =>  {
 
-  const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
 const handleLogin = async () => {
-  if (!email || !password) {
-    setError('Please enter both email and password');
-    setSuccess('');
-    return;
-  }
+    if (!email || !password) {
+      setError('Please enter both email and password');
+      setSuccess('');
+      return;
+    }
 
   try {
     const response = await axios.get('http://localhost:5000/accounts', {
       params: {
-        email: email
+        email: email,
+        password: password
       }
     });
 
-    const accounts = response.data;
+    const users = response.data;
 
-    const user = accounts.find(account => account.password === password);
-
-    if (user) {
-      login(user);
+    if (users.length > 0) {
+      login(users[0]);
       navigate('/app/home');
     } else {
       setError('Invalid email or password');
@@ -49,43 +50,47 @@ const handleLogin = async () => {
 };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-      <Row>
-        <Col md="12">
-          <Card>
+    <Container className="login-container">
+        <div md="6" className="login-image-container">
+          <img src={img_login} alt="Login Illustration" className="login-image" />
+        </div>
+        <div md="6" className="login-form-container">
+          <Card className="login-card">
             <CardBody>
-              <CardTitle tag="h3" className="text-center mb-4">Login</CardTitle>
-              {error && <Alert color="danger">{error}</Alert>}
-              {success && <Alert color="success">{success}</Alert>}
+              <CardTitle tag="h3" className="login-title">Log in to Your Notebook</CardTitle>
+              {error && <Alert color="danger" className="login-alert">{error}</Alert>}
+              {success && <Alert color="success" className="login-alert">{success}</Alert>}
               <Form>
-                <FormGroup className="d-flex align-items-center">
-                  <Label for="email" className="mr-2" style={{ minWidth: '80px' }}>Email</Label>
+                <FormGroup className="form-group">
                   <Input
                     type="email"
                     name="email"
                     id="email"
-                    placeholder="Enter your email"
+                    placeholder="Enter email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="login-input"
                   />
                 </FormGroup>
-                <FormGroup className="d-flex align-items-center">
-                  <Label for="password" className="mr-2" style={{ minWidth: '80px' }}>Password</Label>
+                <FormGroup className="form-group">
                   <Input
                     type="password"
                     name="password"
                     id="password"
-                    placeholder="Enter your password"
+                    placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className="login-input"
                   />
                 </FormGroup>
-                <Button color="primary" block onClick={handleLogin}>Login</Button>
+                <Button block className="login-button" onClick={handleLogin}>SUBMIT</Button>
               </Form>
+              <div className="login-register-link">
+                <a href="/register">Not a member? Register</a>
+              </div>
             </CardBody>
           </Card>
-        </Col>
-      </Row>
+        </div>
     </Container>
   );
 }
