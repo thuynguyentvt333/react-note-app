@@ -18,36 +18,41 @@ const Login = () =>  {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
-const handleLogin = async () => {
+  const handleLogin = async () => {
     if (!email || !password) {
       setError('Please enter both email and password');
       setSuccess('');
       return;
     }
 
-  try {
-    const response = await axios.get('http://localhost:5000/accounts', {
-      params: {
-        email: email,
-        password: password
+    try {
+      const response = await axios.get('http://localhost:5000/accounts', {
+        params: { email: email }
+      });
+
+      const users = response.data;
+
+      if (users.length === 0) {
+        setError('Invalid email or password');
+        setSuccess('');
+        return;
       }
-    });
 
-    const users = response.data;
+      const user = users[0];
 
-    if (users.length > 0) {
-      login(users[0]);
-      navigate('/app/home');
-    } else {
-      setError('Invalid email or password');
+      if (user.password === password) {
+        login(user);
+        navigate('/app/home');
+      } else {
+        setError('Invalid email or password');
+        setSuccess('');
+      }
+    } catch (error) {
+      console.error('There was an error logging in!', error);
+      setError('An error occurred during login');
       setSuccess('');
     }
-  } catch (error) {
-    console.error('There was an error logging in!', error);
-    setError('An error occurred during login');
-    setSuccess('');
-  }
-};
+  };
 
   return (
     <Container className="login-container">
