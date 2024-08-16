@@ -31,6 +31,22 @@
       "password": "1234567890",
       "avatar": "",
       "gender": "Female"
+    },
+    {
+      "id": "5",
+      "username": "Tuấn",
+      "email": "tuan@gmail.com",
+      "password": "$2a$10$AiMO8HDB1cbEr2HltJ6.3O7n1ZWT9/waYkGwfz0YMdziNyK45O0Mq",
+      "avatar": "",
+      "gender": ""
+    },
+    {
+      "id": "6",
+      "username": "Linh",
+      "email": "linh@gmail.com",
+      "password": "$2a$10$.LGUB9dVUZ43bcTQieGw5ea/8zGa8l1CxePyb0FmzGVWYg8tDr5o6",
+      "avatar": "",
+      "gender": ""
     }
   ],
   "tasks": [

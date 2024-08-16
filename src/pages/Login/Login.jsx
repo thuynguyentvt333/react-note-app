@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import './Login.scss';
 import img_login from '../../assets/images/img_login.jpg';
+import bcrypt from 'bcryptjs';
 
 const Login = () =>  {
 
@@ -40,7 +41,9 @@ const Login = () =>  {
 
       const user = users[0];
 
-      if (user.password === password) {
+      const passwordMatch = await bcrypt.compare(password, user.password);
+
+      if (passwordMatch) {
         login(user);
         navigate('/app/home');
       } else {
