@@ -1,0 +1,53 @@
+.common-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .controls-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 100px;
+        font-size: 18px;
+        font-weight: 500;
+
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .delete-multiple-button {
+            margin-left: 10px;
+        }
+
+        &:hover {
+            color: #007bff;
+        }
+    }
+
+    .controls-right {
+        display: flex;
+
+        .search-bar {
+            margin-right: 15px;
+            display: flex;
+
+            input {
+                border-radius: 0;
+                border-right: 0;
+            }
+
+            button {
+                border-radius: 0;
+            }
+        }
+
+        .new-item-button {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    }
+}

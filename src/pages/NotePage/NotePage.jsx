@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthContext';
-import { Table, InputGroup, Input, Button } from 'reactstrap';
-import { FaSort, FaSearch, FaPlus, FaEdit, FaTrash, FaStickyNote } from 'react-icons/fa';
+import { Table, Button } from 'reactstrap';
+import { FaSort, FaEdit, FaTrash } from 'react-icons/fa';
 import NoteModal from './NoteModal/NoteModal';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import './NotePage.scss';
+import CommonControls from '../../components/CommonControls/CommonControls';
 
 const NotePage = () => {
     const { user } = useContext(AuthContext);
@@ -37,11 +38,6 @@ const NotePage = () => {
 
     const toggleModal = () => setModalOpen(!modalOpen);
     const toggleDeleteModal = () => setDeleteModalOpen(!deleteModalOpen);
-
-    const handleNewNote = () => {
-        setSelectedNote(null);
-        toggleModal();
-    };
 
     const handleEditNote = (note) => {
         setSelectedNote(note);
@@ -81,6 +77,11 @@ const NotePage = () => {
         fetchNotes();
     };
 
+    const handleNewNote = () => {
+        setSelectedNote(null);
+        setModalOpen(true);
+    };
+
     const handleSearch = (e) => {
         const searchTerm = e.target.value.toLowerCase();
         setSearchTerm(searchTerm);
@@ -112,41 +113,21 @@ const NotePage = () => {
 
     const handleDeleteMultipleNotes = () => {
         setDeleteMultiple(true);
-        toggleDeleteModal();
+        setDeleteModalOpen(true);
     };
 
     return (
         <div className="note-page">
-            <div className="note-header">
-                <h3>Note List</h3>
-                <div className="note-controls">
-                    <div className='controls-left'>
-                        <Button color="primary" onClick={handleSelectAllNotes}>
-                            <FaStickyNote /> {selectedNotes.length === filteredNotes.length ? 'Unselect All' : 'All Notes'}
-                        </Button>
-                        {selectedNotes.length > 0 && (
-                            <Button color="danger" className="delete-multiple-button" onClick={handleDeleteMultipleNotes}>
-                                <FaTrash /> Delete Selected
-                            </Button>
-                        )}
-                    </div>
-                    <div className='controls-right'>
-                        <InputGroup className="search-bar">
-                            <Input
-                                placeholder="Search notes..."
-                                value={searchTerm}
-                                onChange={handleSearch}
-                            />
-                            <Button>
-                                <FaSearch />
-                            </Button>
-                        </InputGroup>
-                        <Button color="primary" className="new-note-button" onClick={handleNewNote}>
-                            <FaPlus /> New
-                        </Button>
-                    </div>
-                </div>
-            </div>
+            <CommonControls
+                searchTerm={searchTerm}
+                handleSearch={handleSearch}
+                handleSelectAll={handleSelectAllNotes}
+                handleDeleteMultiple={handleDeleteMultipleNotes}
+                handleNewItem={handleNewNote}
+                selectedItemsCount={selectedNotes.length}
+                totalItemsCount={filteredNotes.length}
+                type="note"
+            />
             <Table className="note-table" hover>
                 <thead>
                     <tr>

@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthContext';
-import { Table, InputGroup, Input, Button } from 'reactstrap';
-import { FaSort, FaSearch, FaPlus, FaTasks, FaTrash, FaEdit } from 'react-icons/fa';
+import { Table, Button } from 'reactstrap';
+import { FaSort, FaTrash, FaEdit } from 'react-icons/fa';
 import TaskDetailModal from './TaskDetailModal'; 
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import './TaskPage.scss';
 import { useNavigate } from 'react-router-dom';
+import CommonControls from '../../components/CommonControls/CommonControls';
 
 const TaskPage = () => {
     const { user } = useContext(AuthContext);
@@ -124,36 +125,16 @@ const TaskPage = () => {
 
     return (
         <div className="task-page">
-            <div className="task-header">
-                <h3>Task List</h3>
-                <div className="task-controls">
-                    <div className='controls-left'>
-                        <Button color="primary" onClick={handleSelectAllTasks}>
-                            <FaTasks /> {selectedTasks.length === filteredTasks.length ? 'Unselect All' : 'All Tasks'}
-                        </Button>
-                        {selectedTasks.length > 0 && (
-                            <Button color="danger" className="delete-multiple-button" onClick={handleDeleteMultipleTasks}>
-                                <FaTrash /> Delete Selected
-                            </Button>
-                        )}
-                    </div>
-                    <div className='controls-right'>
-                        <InputGroup className="search-bar">
-                            <Input
-                                placeholder="Search tasks..."
-                                value={searchTerm}
-                                onChange={handleSearch}
-                            />
-                            <Button>
-                                <FaSearch />
-                            </Button>
-                        </InputGroup>
-                        <Button color="primary" className="new-task-button" onClick={handleNewTask}>
-                            <FaPlus /> New
-                        </Button>
-                    </div>
-                </div>
-            </div>
+            <CommonControls
+                searchTerm={searchTerm}
+                handleSearch={handleSearch}
+                handleSelectAll={handleSelectAllTasks}
+                handleDeleteMultiple={handleDeleteMultipleTasks}
+                handleNewItem={handleNewTask}
+                selectedItemsCount={selectedTasks.length}
+                totalItemsCount={filteredTasks.length}
+                type="task"
+            />
             <Table className="task-table" hover>
                 <thead>
                     <tr>

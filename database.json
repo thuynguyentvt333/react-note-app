@@ -12,7 +12,7 @@
       "id": "2",
       "username": "jane_smith",
       "email": "jane.smith@example.com",
-      "password": "1234567890",
+      "password": "$2a$10$AiMO8HDB1cbEr2HltJ6.3O7n1ZWT9/waYkGwfz0YMdziNyK45O0Mq",
       "avatar": "",
       "gender": "Female"
     },
@@ -399,7 +399,7 @@
       "id": "6",
       "account_id": 2,
       "title": "Note 6",
-      "content": "Content of Note 6",
+      "content": "Content of Note 6 ddddddd",
       "created_at": "2024-08-06",
       "updated_at": "2024-08-06",
       "group_id": 3
@@ -432,15 +432,6 @@
       "group_id": 1
     },
     {
-      "id": "10",
-      "account_id": 2,
-      "title": "Note 10",
-      "content": "Content of Note 10",
-      "created_at": "2024-08-10",
-      "updated_at": "2024-08-10",
-      "group_id": 3
-    },
-    {
       "id": "11",
       "account_id": 3,
       "title": "Note 11",
@@ -468,15 +459,6 @@
       "group_id": 1
     },
     {
-      "id": "14",
-      "account_id": 2,
-      "title": "Note 14",
-      "content": "Content of Note 14",
-      "created_at": "2024-08-14",
-      "updated_at": "2024-08-14",
-      "group_id": 3
-    },
-    {
       "id": "15",
       "account_id": 3,
       "title": "Note 15",
@@ -502,15 +484,6 @@
       "created_at": "2024-08-17",
       "updated_at": "2024-08-17",
       "group_id": "1"
-    },
-    {
-      "id": "18",
-      "account_id": 2,
-      "title": "Note 18",
-      "content": "Content of Note 18",
-      "created_at": "2024-08-18",
-      "updated_at": "2024-08-18",
-      "group_id": 3
     },
     {
       "id": "19",
