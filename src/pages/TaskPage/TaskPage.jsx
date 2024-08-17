@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Table, Button } from 'reactstrap';
 import { FaSort, FaTrash, FaEdit } from 'react-icons/fa';
@@ -19,6 +20,7 @@ const TaskPage = () => {
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [deleteMultiple, setDeleteMultiple] = useState(false);
     const [selectedTask, setSelectedTask] = useState(null);
+    const [startDateFilter, setStartDateFilter] = useState('');
     const navigate = useNavigate();
 
     const statusMap = {
@@ -92,14 +94,31 @@ const TaskPage = () => {
     const handleSearch = (e) => {
         const searchTerm = e.target.value.toLowerCase();
         setSearchTerm(searchTerm);
-        if (searchTerm === '') {
-            setFilteredTasks(tasks);
-        } else {
-            const filtered = tasks.filter(task =>
+        filterTasks(searchTerm, startDateFilter);
+    };
+
+    const handleDateFilter = (e) => {
+        const selectedDate = e.target.value;
+        setStartDateFilter(selectedDate);
+        filterTasks(searchTerm, selectedDate);
+    };
+
+    const filterTasks = (searchTerm, selectedDate) => {
+        let filtered = tasks;
+
+        if (searchTerm) {
+            filtered = filtered.filter(task =>
                 task.title.toLowerCase().includes(searchTerm)
             );
-            setFilteredTasks(filtered);
         }
+
+        if (selectedDate) {
+            filtered = filtered.filter(task =>
+                moment(task.start_date).isSameOrAfter(moment(selectedDate), 'day')
+            );
+        }
+
+        setFilteredTasks(filtered);
     };
 
     const handleSelectTask = (taskId) => {
@@ -134,6 +153,8 @@ const TaskPage = () => {
                 selectedItemsCount={selectedTasks.length}
                 totalItemsCount={filteredTasks.length}
                 type="task"
+                startDateFilter={startDateFilter}
+                handleDateFilter={handleDateFilter}
             />
             <Table className="task-table" hover>
                 <thead>

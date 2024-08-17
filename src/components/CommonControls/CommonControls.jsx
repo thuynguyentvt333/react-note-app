@@ -11,7 +11,9 @@ const CommonControls = ({
     handleNewItem,
     selectedItemsCount,
     totalItemsCount,
-    type
+    type,
+    startDateFilter,
+    handleDateFilter
 }) => {
     return (
         <div className="common-controls">
@@ -27,6 +29,14 @@ const CommonControls = ({
                 )}
             </div>
             <div className='controls-right'>
+                {type === 'task' &&
+                    <Input
+                        type="date"
+                        value={startDateFilter}
+                        onChange={handleDateFilter}
+                        className="date-filter"
+                    />
+                }
                 <InputGroup className="search-bar">
                     <Input
                         placeholder={`Search ${type === 'task' ? 'tasks' : 'notes'}...`}

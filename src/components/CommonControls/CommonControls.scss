@@ -21,14 +21,11 @@
         .delete-multiple-button {
             margin-left: 10px;
         }
-
-        &:hover {
-            color: #007bff;
-        }
     }
 
     .controls-right {
         display: flex;
+        align-items: center;
 
         .search-bar {
             margin-right: 15px;
@@ -42,6 +39,10 @@
             button {
                 border-radius: 0;
             }
+        }
+
+        .date-filter {
+            margin-right: 15px;
         }
 
         .new-item-button {
