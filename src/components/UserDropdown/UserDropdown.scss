@@ -1,0 +1,36 @@
+.user-dropdown {
+    .user-icon {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        svg {
+            color: #007bff;
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+    }
+
+    .dropdown-menu {
+        right: 0;
+        left: auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown-item {
+        color: #333;
+        cursor: pointer;
+
+        &:hover {
+            background-color: transparent !important;
+        }
+    }
+}

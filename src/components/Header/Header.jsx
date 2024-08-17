@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import UserDropdown from '../UserDropdown/UserDropdown';
 import './Header.scss';
 
 const Header = () => {
@@ -20,15 +21,18 @@ const Header = () => {
 
     return (
         <header className="header">
-            <div className="nav-icons">
-                <FaArrowLeft onClick={() => navigate(-1)} aria-label="Go Back" className='icon-arrow' />
-                <FaArrowRight onClick={() => navigate(1)} aria-label="Go Forward" className='icon-arrow' />
+            <div className='left'>
+                <div className="nav-icons">
+                    <FaArrowLeft onClick={() => navigate(-1)} aria-label="Go Back" className='icon-arrow' />
+                    <FaArrowRight onClick={() => navigate(1)} aria-label="Go Forward" className='icon-arrow' />
+                </div>
+                <div className="breadcrumb">
+                    <a href="/">Home</a>
+                    {breadcrumbPaths.length > 0 && ' / '}
+                    {breadcrumb}
+                </div>
             </div>
-            <div className="breadcrumb">
-                <a href="/">Home</a>
-                {breadcrumbPaths.length > 0 && ' / '}
-                {breadcrumb}
-            </div>
+            <UserDropdown />
         </header>
     );
 };
