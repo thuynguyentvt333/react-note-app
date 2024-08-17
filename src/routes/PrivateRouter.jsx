@@ -9,6 +9,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import GroupPage from '../pages/GroupPage/GroupPage';
 import EditTask from '../pages/TaskPage/EditTask';
 import AddTask from '../pages/TaskPage/AddTask';
+import ProfilePage from '../pages/ProfilePage/ProfilePage';
 
 const PrivateRouter = () => {
   const { user } = useContext(AuthContext);
@@ -26,6 +27,7 @@ const PrivateRouter = () => {
         <Route path="/tasks/edit/:id" element={<EditTask />} />
         <Route path="/tasks/new" element={<AddTask />} />
         <Route path="/notes" element={<NotePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </PrivateLayout>

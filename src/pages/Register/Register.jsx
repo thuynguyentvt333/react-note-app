@@ -40,7 +40,8 @@ const Register = () => {
                 email: email,
                 password: hashedPassword,
                 avatar: '',
-                gender: ''
+                gender: '',
+                image: ''
             };
 
             await axios.post('http://localhost:5000/accounts', newUser);
