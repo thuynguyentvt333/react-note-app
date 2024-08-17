@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import axios from 'axios';
 import './UpdateProfileModal.scss';
 
-const UpdateProfileModal = ({ isOpen, toggle, account, refreshAccountInfo }) => {
+const UpdateProfileModal = ({ isOpen, toggle, account, setAccount, refreshAccountInfo }) => {
     const [updatedAccount, setUpdatedAccount] = useState({
         username: account.username,
         email: account.email,
         gender: account.gender,
         avatar: account.avatar,
+        password: account.password,
     });
     const [avatarPreview, setAvatarPreview] = useState(account.avatar || '');
+
+    useEffect(() => {
+        setUpdatedAccount((prevAccount) => ({
+            ...prevAccount,
+            password: account.password,
+        }));
+    }, [account]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -38,9 +46,7 @@ const UpdateProfileModal = ({ isOpen, toggle, account, refreshAccountInfo }) => 
     const handleSubmit = async () => {
         try {
             await axios.put(`http://localhost:5000/accounts/${account.id}`, updatedAccount);
-
             refreshAccountInfo();
-
             toggle();
         } catch (error) {
             console.error('Failed to update account info', error);
