@@ -15,11 +15,6 @@ const Sidebar = () => {
 
     return (
         <aside className="sidebar">
-            <div className="user-info">
-                <FaUser className="user-icon" />
-                <span>{user ? user.username : 'Guest'}</span>
-            </div>
-            
             <nav>
                 <ul>
                     <li>

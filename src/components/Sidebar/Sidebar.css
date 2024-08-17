@@ -1,24 +1,10 @@
 .sidebar {
-    width: 250px;
+    width: 200px;
     background-color: #333;
     color: white;
     padding: 20px;
     display: flex;
     flex-direction: column;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #444;
-    border-radius: 5px;
-}
-
-.user-icon {
-    margin-right: 10px;
-    color: white;
 }
 
 .sidebar ul {
