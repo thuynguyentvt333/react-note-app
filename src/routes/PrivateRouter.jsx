@@ -20,7 +20,7 @@ const PrivateRouter = () => {
   return (
     <PrivateLayout>
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/group" element={<GroupPage />} />
         <Route path="/tasks" element={<TaskPage />} />
         <Route path="/tasks/edit/:id" element={<EditTask />} />

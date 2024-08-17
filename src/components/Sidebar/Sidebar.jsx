@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaHome, FaInfoCircle, FaStickyNote, FaTasks, FaCog, FaUser, FaSignOutAlt, FaLayerGroup } from 'react-icons/fa';
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import './Sidebar.css';
 
 const Sidebar = () => {
@@ -23,7 +23,7 @@ const Sidebar = () => {
             <nav>
                 <ul>
                     <li>
-                        <Link to="/app/home">
+                        <Link to="/app">
                             <FaHome /> Home
                         </Link>
                     </li>

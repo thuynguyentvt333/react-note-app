@@ -1,7 +1,7 @@
 import React from 'react';
 import './PrivateLayout.css';
-import Sidebar from '../components/Sidebar';
-import Header from '../components/Header';
+import Sidebar from '../components/Sidebar/Sidebar';
+import Header from '../components/Header/Header';
 
 const PrivateLayout = ({ children }) => {
     return (
