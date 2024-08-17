@@ -4,7 +4,7 @@ import moment from 'moment';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Table, Button } from 'reactstrap';
 import { FaSort, FaTrash, FaEdit } from 'react-icons/fa';
-import TaskDetailModal from './TaskDetailModal'; 
+import TaskDetailModal from './TaskDetailModal';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import './TaskPage.scss';
 import { useNavigate } from 'react-router-dom';
@@ -21,6 +21,7 @@ const TaskPage = () => {
     const [deleteMultiple, setDeleteMultiple] = useState(false);
     const [selectedTask, setSelectedTask] = useState(null);
     const [startDateFilter, setStartDateFilter] = useState('');
+    const [selectedGroup, setSelectedGroup] = useState(null);
     const navigate = useNavigate();
 
     const statusMap = {
@@ -94,16 +95,21 @@ const TaskPage = () => {
     const handleSearch = (e) => {
         const searchTerm = e.target.value.toLowerCase();
         setSearchTerm(searchTerm);
-        filterTasks(searchTerm, startDateFilter);
+        filterTasks(searchTerm, startDateFilter, selectedGroup);
     };
 
     const handleDateFilter = (e) => {
         const selectedDate = e.target.value;
         setStartDateFilter(selectedDate);
-        filterTasks(searchTerm, selectedDate);
+        filterTasks(searchTerm, selectedDate, selectedGroup);
     };
 
-    const filterTasks = (searchTerm, selectedDate) => {
+    const handleGroupFilter = (group) => {
+        setSelectedGroup(group);
+        filterTasks(searchTerm, startDateFilter, group);
+    };
+
+    const filterTasks = (searchTerm, selectedDate, group) => {
         let filtered = tasks;
 
         if (searchTerm) {
@@ -116,6 +122,10 @@ const TaskPage = () => {
             filtered = filtered.filter(task =>
                 moment(task.start_date).isSameOrAfter(moment(selectedDate), 'day')
             );
+        }
+
+        if (group) {
+            filtered = filtered.filter(task => task.group_id === group.id);
         }
 
         setFilteredTasks(filtered);
@@ -155,6 +165,8 @@ const TaskPage = () => {
                 type="task"
                 startDateFilter={startDateFilter}
                 handleDateFilter={handleDateFilter}
+                selectedGroup={selectedGroup}
+                handleGroupFilter={handleGroupFilter}
             />
             <Table className="task-table" hover>
                 <thead>

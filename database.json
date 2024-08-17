@@ -179,20 +179,17 @@
       "end_time": "00:00"
     },
     {
-      "id": "10",
-      "account_id": 2,
       "title": "Task 10",
       "description": "Description of Task 10",
-      "created_at": "2024-08-10",
-      "updated_at": "2024-08-10",
-      "priority_id": 1,
       "status_id": 1,
+      "priority_id": 1,
+      "group_id": "c54a",
       "parent_id": null,
-      "group_id": 3,
       "start_date": "2024-08-10",
       "end_date": "2024-08-14",
       "start_time": "18:00",
-      "end_time": "02:00"
+      "end_time": "02:00",
+      "id": "10"
     },
     {
       "id": "11",
@@ -366,7 +363,7 @@
       "content": "Content of Note 2",
       "created_at": "2024-08-02",
       "updated_at": "2024-08-02",
-      "group_id": 3
+      "group_id": "3"
     },
     {
       "id": "3",
@@ -402,7 +399,7 @@
       "content": "Content of Note 6 ddddddd",
       "created_at": "2024-08-06",
       "updated_at": "2024-08-06",
-      "group_id": 3
+      "group_id": "c54a"
     },
     {
       "id": "7",
@@ -573,6 +570,10 @@
       "id": "3",
       "name": "Work 3",
       "account_id": 2
+    },
+    {
+      "id": "c54a",
+      "name": "đi chơi"
     }
   ]
 }

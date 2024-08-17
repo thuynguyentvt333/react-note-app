@@ -26,6 +26,7 @@
     .controls-right {
         display: flex;
         align-items: center;
+        gap: 20px;
 
         .search-bar {
             margin-right: 15px;
@@ -39,10 +40,6 @@
             button {
                 border-radius: 0;
             }
-        }
-
-        .date-filter {
-            margin-right: 15px;
         }
 
         .new-item-button {

@@ -18,6 +18,7 @@ const NotePage = () => {
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [deleteMultiple, setDeleteMultiple] = useState(false);
     const [selectedNote, setSelectedNote] = useState(null);
+    const [selectedGroup, setSelectedGroup] = useState(null);
 
     useEffect(() => {
         if (user) {
@@ -85,14 +86,28 @@ const NotePage = () => {
     const handleSearch = (e) => {
         const searchTerm = e.target.value.toLowerCase();
         setSearchTerm(searchTerm);
-        if (searchTerm === '') {
-            setFilteredNotes(notes);
-        } else {
-            const filtered = notes.filter(note =>
+        filterNotes(searchTerm, selectedGroup);
+    };
+
+    const handleGroupFilter = (group) => {
+        setSelectedGroup(group);
+        filterNotes(searchTerm, group);
+    };
+
+    const filterNotes = (searchTerm, group) => {
+        let filtered = notes;
+
+        if (searchTerm) {
+            filtered = filtered.filter(note =>
                 note.title.toLowerCase().includes(searchTerm)
             );
-            setFilteredNotes(filtered);
         }
+
+        if (group) {
+            filtered = filtered.filter(note => note.group_id === group.id);
+        }
+
+        setFilteredNotes(filtered);
     };
 
     const handleSelectNote = (noteId) => {
@@ -127,6 +142,8 @@ const NotePage = () => {
                 selectedItemsCount={selectedNotes.length}
                 totalItemsCount={filteredNotes.length}
                 type="note"
+                selectedGroup={selectedGroup}
+                handleGroupFilter={handleGroupFilter}
             />
             <Table className="note-table" hover>
                 <thead>
@@ -134,7 +151,6 @@ const NotePage = () => {
                         <th><input type="checkbox" onChange={handleSelectAllNotes} checked={selectedNotes.length === filteredNotes.length} /></th>
                         <th>Title <FaSort /></th>
                         <th>Content <FaSort /></th>
-                        <th>Group <FaSort /></th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -144,7 +160,6 @@ const NotePage = () => {
                             <td><input type="checkbox" checked={selectedNotes.includes(note.id)} onChange={() => handleSelectNote(note.id)} /></td>
                             <td>{note.title}</td>
                             <td>{note.content}</td>
-                            <td>{note.group_id ? `Group ${note.group_id}` : 'No Group'}</td>
                             <td>
                                 <Button size="sm" color="info" className="action-button" onClick={() => handleEditNote(note)}>
                                     <FaEdit />
@@ -178,6 +193,6 @@ const NotePage = () => {
             />
         </div>
     );
-}
+};
 
 export default NotePage;

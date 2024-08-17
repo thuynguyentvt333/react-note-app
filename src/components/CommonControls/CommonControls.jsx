@@ -1,7 +1,9 @@
-import React from 'react';
-import { InputGroup, Input, Button } from 'reactstrap';
+import React, { useEffect, useState, useContext } from 'react';
+import { InputGroup, Input, Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { FaPlus, FaSearch, FaTasks, FaStickyNote, FaTrash } from 'react-icons/fa';
+import axios from 'axios';
 import './CommonControls.scss';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const CommonControls = ({
     searchTerm,
@@ -13,8 +15,29 @@ const CommonControls = ({
     totalItemsCount,
     type,
     startDateFilter,
-    handleDateFilter
+    handleDateFilter,
+    selectedGroup,
+    handleGroupFilter
 }) => {
+    const { user } = useContext(AuthContext);
+    const [groups, setGroups] = useState([]);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+    useEffect(() => {
+        fetchGroups();
+    }, []);
+
+    const fetchGroups = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/groups?account_id=${user.id}`);
+            setGroups(response.data);
+        } catch (error) {
+            console.error('Error fetching groups:', error);
+        }
+    };
+
     return (
         <div className="common-controls">
             <div className='controls-left'>
@@ -29,14 +52,31 @@ const CommonControls = ({
                 )}
             </div>
             <div className='controls-right'>
-                {type === 'task' &&
-                    <Input
-                        type="date"
-                        value={startDateFilter}
-                        onChange={handleDateFilter}
-                        className="date-filter"
-                    />
-                }
+                {type && (
+                    <>
+                        <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown} className="group-filter-dropdown">
+                            <DropdownToggle caret>
+                                {selectedGroup ? `Group: ${selectedGroup.name}` : 'Select Group'}
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem onClick={() => handleGroupFilter(null)}>All Groups</DropdownItem>
+                                {groups.map(group => (
+                                    <DropdownItem key={group.id} onClick={() => handleGroupFilter(group)}>
+                                        {group.name}
+                                    </DropdownItem>
+                                ))}
+                            </DropdownMenu>
+                        </Dropdown>
+                        {type === 'task' && (
+                            <Input
+                                type="date"
+                                value={startDateFilter}
+                                onChange={handleDateFilter}
+                                className="date-filter"
+                            />
+                        )}
+                    </>
+                )}
                 <InputGroup className="search-bar">
                     <Input
                         placeholder={`Search ${type === 'task' ? 'tasks' : 'notes'}...`}
