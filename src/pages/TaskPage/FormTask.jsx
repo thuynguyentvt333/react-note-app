@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, Button, Row, Col } from 'reactstrap';
 import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthContext';
+import moment from 'moment';
 import './FormTask.scss';
 
 const FormTask = ({ task }) => {
@@ -46,6 +47,7 @@ const FormTask = ({ task }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const currentDate = moment().format('YYYY-MM-DD');
         const taskData = {
             title,
             description,
@@ -57,7 +59,9 @@ const FormTask = ({ task }) => {
             end_date: endDate,
             start_time: startTime,
             end_time: endTime,
-            account_id: parseInt(user.id, 10)
+            account_id: parseInt(user.id, 10),
+            created_at: task && task.created_at ? task.created_at : currentDate,
+            updated_at: currentDate
         };
 
         if (task) {
