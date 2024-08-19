@@ -125,7 +125,7 @@ const TaskPage = () => {
         }
 
         if (group) {
-            filtered = filtered.filter(task => task.group_id === group.id);
+            filtered = filtered.filter(task => parseInt(task.group_id, 10) === parseInt(group.id, 10));
         }
 
         setFilteredTasks(filtered);

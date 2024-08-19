@@ -67,22 +67,6 @@
       "end_time": "17:00"
     },
     {
-      "id": "2",
-      "account_id": 2,
-      "title": "Task 2",
-      "description": "Description of Task 2",
-      "created_at": "2024-08-02",
-      "updated_at": "2024-08-02",
-      "priority_id": 2,
-      "status_id": 2,
-      "parent_id": null,
-      "group_id": 3,
-      "start_date": "2024-08-02",
-      "end_date": "2024-08-06",
-      "start_time": "10:00",
-      "end_time": "18:00"
-    },
-    {
       "id": "3",
       "account_id": 3,
       "title": "Task 3",
@@ -131,22 +115,6 @@
       "end_time": "21:00"
     },
     {
-      "id": "6",
-      "account_id": 2,
-      "title": "Task 6",
-      "description": "Description of Task 6",
-      "created_at": "2024-08-06",
-      "updated_at": "2024-08-06",
-      "priority_id": 3,
-      "status_id": 3,
-      "parent_id": null,
-      "group_id": 3,
-      "start_date": "2024-08-06",
-      "end_date": "2024-08-10",
-      "start_time": "14:00",
-      "end_time": "22:00"
-    },
-    {
       "id": "7",
       "account_id": 3,
       "title": "Task 7",
@@ -177,19 +145,6 @@
       "end_date": "2024-08-12",
       "start_time": "16:00",
       "end_time": "00:00"
-    },
-    {
-      "title": "Task 10",
-      "description": "Description of Task 10",
-      "status_id": 1,
-      "priority_id": 1,
-      "group_id": "c54a",
-      "parent_id": null,
-      "start_date": "2024-08-10",
-      "end_date": "2024-08-14",
-      "start_time": "18:00",
-      "end_time": "02:00",
-      "id": "10"
     },
     {
       "id": "11",
@@ -224,22 +179,6 @@
       "end_time": "04:00"
     },
     {
-      "id": "14",
-      "account_id": 2,
-      "title": "Task 14",
-      "description": "Description of Task 14",
-      "created_at": "2024-08-14",
-      "updated_at": "2024-08-14",
-      "priority_id": 2,
-      "status_id": 2,
-      "parent_id": null,
-      "group_id": 3,
-      "start_date": "2024-08-14",
-      "end_date": "2024-08-18",
-      "start_time": "22:00",
-      "end_time": "06:00"
-    },
-    {
       "id": "15",
       "account_id": 3,
       "title": "Task 15",
@@ -270,22 +209,6 @@
       "end_date": "2024-08-20",
       "start_time": "00:00",
       "end_time": "08:00"
-    },
-    {
-      "id": "18",
-      "account_id": 2,
-      "title": "Task 18",
-      "description": "Description of Task 18",
-      "created_at": "2024-08-18",
-      "updated_at": "2024-08-18",
-      "priority_id": 3,
-      "status_id": 3,
-      "parent_id": null,
-      "group_id": 3,
-      "start_date": "2024-08-18",
-      "end_date": "2024-08-22",
-      "start_time": "02:00",
-      "end_time": "10:00"
     },
     {
       "id": "19",
@@ -320,30 +243,32 @@
       "end_time": "12:00"
     },
     {
-      "id": "dca7",
-      "title": "việc 1",
-      "description": "kkkkkkkkkkkkkkkk",
-      "status_id": 1,
+      "title": "task 1 update",
+      "description": "...............................................",
+      "status_id": 2,
       "priority_id": 2,
-      "group_id": null,
+      "group_id": 1,
       "parent_id": null,
-      "start_date": "2024-08-22",
-      "end_date": "2024-08-24",
-      "start_time": "06:35",
-      "end_time": "06:37"
+      "start_date": "2024-08-20",
+      "end_date": "2024-08-22",
+      "start_time": "06:50",
+      "end_time": "10:50",
+      "account_id": 2,
+      "id": "21"
     },
     {
-      "title": "gggggg",
-      "description": "mô tả..................",
-      "status_id": 2,
+      "id": "22",
+      "title": "task 2",
+      "description": "................................................",
+      "status_id": 1,
       "priority_id": 1,
-      "group_id": "1",
+      "group_id": 2,
       "parent_id": null,
-      "start_date": "2024-09-06",
-      "end_date": "2024-09-07",
-      "start_time": "06:40",
-      "end_time": "07:42",
-      "id": "c7b4"
+      "start_date": "2024-08-19",
+      "end_date": "2024-08-20",
+      "start_time": "10:00",
+      "end_time": "11:00",
+      "account_id": 2
     }
   ],
   "notes": [
@@ -355,15 +280,6 @@
       "created_at": "2024-08-01",
       "updated_at": "2024-08-01",
       "group_id": 1
-    },
-    {
-      "id": "2",
-      "account_id": 2,
-      "title": "Note 2",
-      "content": "Content of Note 2",
-      "created_at": "2024-08-02",
-      "updated_at": "2024-08-02",
-      "group_id": "3"
     },
     {
       "id": "3",
@@ -391,15 +307,6 @@
       "created_at": "2024-08-05",
       "updated_at": "2024-08-05",
       "group_id": 1
-    },
-    {
-      "id": "6",
-      "account_id": 2,
-      "title": "Note 6",
-      "content": "Content of Note 6 ddddddd",
-      "created_at": "2024-08-06",
-      "updated_at": "2024-08-06",
-      "group_id": "c54a"
     },
     {
       "id": "7",
@@ -499,6 +406,24 @@
       "created_at": "2024-08-20",
       "updated_at": "2024-08-20",
       "group_id": null
+    },
+    {
+      "id": "21",
+      "title": "Note 1",
+      "content": "............................",
+      "group_id": 2,
+      "account_id": 2,
+      "created_at": "2024-08-19",
+      "updated_at": "2024-08-19"
+    },
+    {
+      "id": "22",
+      "title": "note 2 edit",
+      "content": "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+      "group_id": 2,
+      "account_id": 2,
+      "created_at": "2024-08-19",
+      "updated_at": "2024-08-19"
     }
   ],
   "item_connections": [
@@ -558,22 +483,13 @@
   "groups": [
     {
       "id": "1",
-      "name": "Học tập",
-      "account_id": 1
-    },
-    {
-      "id": "2",
-      "name": "Work 2",
-      "account_id": 1
-    },
-    {
-      "id": "3",
-      "name": "Work 3",
+      "name": "Học code",
       "account_id": 2
     },
     {
-      "id": "c54a",
-      "name": "đi chơi"
+      "id": "2",
+      "name": "Chơi game",
+      "account_id": 2
     }
   ]
 }

@@ -104,7 +104,7 @@ const NotePage = () => {
         }
 
         if (group) {
-            filtered = filtered.filter(note => note.group_id === group.id);
+            filtered = filtered.filter(note => (parseInt(note.group_id, 10) === parseInt(group.id, 10)));
         }
 
         setFilteredNotes(filtered);

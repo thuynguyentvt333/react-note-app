@@ -44,19 +44,20 @@ const FormTask = ({ task }) => {
         }
     }, [task, user]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const taskData = {
             title,
             description,
             status_id: statusId,
             priority_id: priorityId,
-            group_id: groupId || null,
+            group_id: parseInt(groupId, 10) || null,
             parent_id: parentId || null,
             start_date: startDate,
             end_date: endDate,
             start_time: startTime,
-            end_time: endTime
+            end_time: endTime,
+            account_id: parseInt(user.id, 10)
         };
 
         if (task) {
@@ -64,9 +65,20 @@ const FormTask = ({ task }) => {
                 .then(() => navigate('/app/tasks'))
                 .catch(error => console.error('Error updating task:', error));
         } else {
-            axios.post('http://localhost:5000/tasks', taskData)
-                .then(() => navigate('/app/tasks'))
-                .catch(error => console.error('Error creating task:', error));
+            try {
+                const response = await axios.get('http://localhost:5000/tasks');
+                const existingTasks = response.data;
+                const maxId = existingTasks.length > 0 ? Math.max(...existingTasks.map(t => t.id)) : 0;
+
+                // Tạo task mới với id mới
+                const newTask = { ...taskData, id: maxId + 1 };
+                
+                axios.post('http://localhost:5000/tasks', newTask)
+                    .then(() => navigate('/app/tasks'))
+                    .catch(error => console.error('Error creating task:', error));
+            } catch (error) {
+                console.error('Error fetching tasks:', error);
+            }
         }
     };
 

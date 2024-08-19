@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import axios from 'axios';
+import moment from 'moment';
 
 const NoteModal = ({ isOpen, toggle, note, onSave, accountId }) => {
     const [title, setTitle] = useState('');
@@ -12,7 +13,7 @@ const NoteModal = ({ isOpen, toggle, note, onSave, accountId }) => {
         if (note) {
             setTitle(note.title || '');
             setContent(note.content || '');
-            setGroupId(note.group_id || '');
+            setGroupId(note.group_id ? parseInt(note.group_id, 10) : '');
         }
     }, [note]);
 
@@ -28,29 +29,54 @@ const NoteModal = ({ isOpen, toggle, note, onSave, accountId }) => {
         }
     }, [isOpen, accountId]);
 
-    const handleSave = () => {
+    const handleSave = async () => {
+        const currentDate = moment().format('YYYY-MM-DD');
         const noteData = {
             ...note,
             title,
             content,
-            group_id: groupId || null
+            group_id: groupId ? parseInt(groupId, 10) : null,
+            account_id: parseInt(accountId, 10),
+            created_at: note && note.created_at ? note.created_at : currentDate,
+            updated_at: currentDate
         };
 
-        const saveAction = note && note.id
-            ? axios.put(`http://localhost:5000/notes/${note.id}`, noteData)
-            : axios.post('http://localhost:5000/notes', noteData);
+        if (note && note.id) {
+            axios.put(`http://localhost:5000/notes/${note.id}`, noteData)
+                .then(() => {
+                    onSave();
+                    resetForm();
+                })
+                .catch(error => {
+                    console.error('Error updating note:', error);
+                });
+        } else {
+            try {
+                const response = await axios.get('http://localhost:5000/notes');
+                const existingNotes = response.data;
+                const maxId = existingNotes.length > 0 ? Math.max(...existingNotes.map(n => n.id)) : 0;
+                
+                const newNote = { ...noteData, id: maxId + 1 };
 
-        saveAction
-            .then(() => {
-                onSave();
-                toggle();
-                setTitle('');
-                setContent('');
-                setGroupId('');
-            })
-            .catch(error => {
-                console.error('Error saving note:', error);
-            });
+                axios.post('http://localhost:5000/notes', newNote)
+                    .then(() => {
+                        onSave();
+                        resetForm();
+                    })
+                    .catch(error => {
+                        console.error('Error creating note:', error);
+                    });
+            } catch (error) {
+                console.error('Error fetching notes:', error);
+            }
+        }
+    };
+
+    const resetForm = () => {
+        setTitle('');
+        setContent('');
+        setGroupId('');
+        toggle();
     };
 
     return (
@@ -87,7 +113,7 @@ const NoteModal = ({ isOpen, toggle, note, onSave, accountId }) => {
                             name="group_id"
                             id="noteGroup"
                             value={groupId}
-                            onChange={(e) => setGroupId(e.target.value)}
+                            onChange={(e) => setGroupId(parseInt(e.target.value, 10))}
                         >
                             <option value="">No Group</option>
                             {groups.map(group => (
@@ -103,10 +129,10 @@ const NoteModal = ({ isOpen, toggle, note, onSave, accountId }) => {
                 <Button color="primary" onClick={handleSave}>
                     {note && note.id ? 'Update' : 'Create'}
                 </Button>{' '}
-                <Button color="secondary" onClick={toggle}>Cancel</Button>
+                <Button color="secondary" onClick={resetForm}>Cancel</Button>
             </ModalFooter>
         </Modal>
     );
-}
+};
 
 export default NoteModal;

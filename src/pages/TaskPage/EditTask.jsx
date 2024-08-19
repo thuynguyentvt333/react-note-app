@@ -8,8 +8,12 @@ const EditTask = () => {
     const [task, setTask] = useState(null);
 
     useEffect(() => {
+        console.log('Fetching task with ID:', id);
         axios.get(`http://localhost:5000/tasks/${id}`)
-            .then(response => setTask(response.data))
+            .then(response => {
+                console.log('Fetched task:', response.data);
+                setTask(response.data);
+            })
             .catch(error => console.error('Error fetching task:', error));
     }, [id]);
 
