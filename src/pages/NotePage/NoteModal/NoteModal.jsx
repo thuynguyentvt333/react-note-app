@@ -14,6 +14,10 @@ const NoteModal = ({ isOpen, toggle, note, onSave, accountId }) => {
             setTitle(note.title || '');
             setContent(note.content || '');
             setGroupId(note.group_id ? parseInt(note.group_id, 10) : '');
+        } else {
+            setTitle('');
+            setContent('');
+            setGroupId('');
         }
     }, [note]);
 

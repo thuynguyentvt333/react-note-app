@@ -112,7 +112,10 @@ const NotePage = () => {
                 setFilteredNotes={setFilteredNotes}
                 handleSelectAll={handleSelectAllNotes}
                 handleDeleteMultiple={handleDeleteMultipleNotes}
-                handleNewItem={() => setModalOpen(true)}
+                handleNewItem={() => {
+                    setSelectedNote(null);
+                    setModalOpen(true);
+                }}
                 selectedItemsCount={selectedNotes.length}
                 totalItemsCount={filteredNotes.length}
             />
