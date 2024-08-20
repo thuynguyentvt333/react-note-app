@@ -18,6 +18,8 @@ const FormTask = ({ task }) => {
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
     const [groups, setGroups] = useState([]);
+    const [dateError, setDateError] = useState('');
+    const [timeError, setTimeError] = useState('');
 
     const navigate = useNavigate();
 
@@ -43,8 +45,34 @@ const FormTask = ({ task }) => {
         }
     }, [task, user]);
 
+    useEffect(() => {
+        // kiểm tra ngày
+        if (startDate && endDate) {
+            if (moment(endDate).isBefore(moment(startDate))) {
+                setDateError('End date must be after the start date.');
+            } else {
+                setDateError('');
+
+                // cùng ngày
+                if (moment(startDate).isSame(endDate)) {
+                    if (startTime && endTime && moment(endTime, 'HH:mm').isBefore(moment(startTime, 'HH:mm'))) {
+                        setTimeError('End time must be after the start time.');
+                    } else {
+                        setTimeError('');
+                    }
+                } else {
+                    setTimeError('');
+                }
+            }
+        }
+    }, [startDate, endDate, startTime, endTime]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (dateError || timeError) {
+            return;
+        }
+
         const currentDate = moment().format('YYYY-MM-DD');
         const taskData = {
             title,
@@ -140,6 +168,7 @@ const FormTask = ({ task }) => {
                     <FormGroup>
                         <Label for="endDate">End Date</Label>
                         <Input type="date" id="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} required />
+                        {dateError && <div className="error-text" style={{ color: 'red' }}>{dateError}</div>}
                     </FormGroup>
                 </Col>
             </Row>
@@ -154,10 +183,11 @@ const FormTask = ({ task }) => {
                     <FormGroup>
                         <Label for="endTime">End Time</Label>
                         <Input type="time" id="endTime" value={endTime} onChange={(e) => setEndTime(e.target.value)} required />
+                        {timeError && <div className="error-text" style={{ color: 'red' }}>{timeError}</div>}
                     </FormGroup>
                 </Col>
             </Row>
-            <Button color="primary" type="submit">{task ? 'Update Task' : 'Create Task'}</Button>
+            <Button color="primary" type="submit" disabled={dateError || timeError}>{task ? 'Update Task' : 'Create Task'}</Button>
         </Form>
     );
 };
