@@ -7,16 +7,20 @@ import NoteModal from './NoteModal/NoteModal';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import './NotePage.scss';
 import NoteControls from './NoteControls/NoteControls';
+import PaginationControls from '../../components/PaginationControls/PaginationControls';
 
 const NotePage = () => {
     const { user } = useContext(AuthContext);
     const [notes, setNotes] = useState([]);
     const [filteredNotes, setFilteredNotes] = useState([]);
+    const [paginatedNotes, setPaginatedNotes] = useState([]);
     const [selectedNotes, setSelectedNotes] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [deleteMultiple, setDeleteMultiple] = useState(false);
     const [selectedNote, setSelectedNote] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(1);
 
     useEffect(() => {
         if (user) {
@@ -81,10 +85,10 @@ const NotePage = () => {
     };
 
     const handleSelectAllNotes = () => {
-        if (selectedNotes.length === filteredNotes.length) {
+        if (selectedNotes.length === paginatedNotes.length) {
             setSelectedNotes([]);
         } else {
-            setSelectedNotes(filteredNotes.map(note => note.id));
+            setSelectedNotes(paginatedNotes.map(note => note.id));
         }
     };
 
@@ -107,14 +111,14 @@ const NotePage = () => {
             <Table className="note-table" hover>
                 <thead>
                     <tr>
-                        <th><input type="checkbox" onChange={handleSelectAllNotes} checked={selectedNotes.length === filteredNotes.length} /></th>
+                        <th><input type="checkbox" onChange={handleSelectAllNotes} checked={selectedNotes.length === paginatedNotes.length} /></th>
                         <th>Title <FaSort /></th>
                         <th>Content <FaSort /></th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredNotes.map(note => (
+                    {paginatedNotes.map(note => (
                         <tr key={note.id}>
                             <td><input type="checkbox" checked={selectedNotes.includes(note.id)} onChange={() => handleSelectNote(note.id)} /></td>
                             <td>{note.title}</td>
@@ -131,6 +135,14 @@ const NotePage = () => {
                     ))}
                 </tbody>
             </Table>
+            <PaginationControls
+                data={filteredNotes}
+                pageSize={pageSize}
+                setPageSize={setPageSize}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                setPaginatedData={setPaginatedNotes}
+            />
             <div className="note-footer">
                 <span>Count {filteredNotes.length}</span>
             </div>
