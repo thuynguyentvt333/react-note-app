@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
-import moment from 'moment';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Table, Button } from 'reactstrap';
 import { FaSort, FaTrash, FaEdit } from 'react-icons/fa';
@@ -8,20 +7,17 @@ import TaskDetailModal from './TaskDetailModal';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import './TaskPage.scss';
 import { useNavigate } from 'react-router-dom';
-import CommonControls from '../../components/CommonControls/CommonControls';
+import TaskControls from './TaskControls/TaskControls';
 
 const TaskPage = () => {
     const { user } = useContext(AuthContext);
     const [tasks, setTasks] = useState([]);
     const [filteredTasks, setFilteredTasks] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
     const [selectedTasks, setSelectedTasks] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [deleteMultiple, setDeleteMultiple] = useState(false);
     const [selectedTask, setSelectedTask] = useState(null);
-    const [startDateFilter, setStartDateFilter] = useState('');
-    const [selectedGroup, setSelectedGroup] = useState(null);
     const navigate = useNavigate();
 
     const statusMap = {
@@ -92,45 +88,6 @@ const TaskPage = () => {
         }
     };
 
-    const handleSearch = (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        setSearchTerm(searchTerm);
-        filterTasks(searchTerm, startDateFilter, selectedGroup);
-    };
-
-    const handleDateFilter = (e) => {
-        const selectedDate = e.target.value;
-        setStartDateFilter(selectedDate);
-        filterTasks(searchTerm, selectedDate, selectedGroup);
-    };
-
-    const handleGroupFilter = (group) => {
-        setSelectedGroup(group);
-        filterTasks(searchTerm, startDateFilter, group);
-    };
-
-    const filterTasks = (searchTerm, selectedDate, group) => {
-        let filtered = tasks;
-
-        if (searchTerm) {
-            filtered = filtered.filter(task =>
-                task.title.toLowerCase().includes(searchTerm)
-            );
-        }
-
-        if (selectedDate) {
-            filtered = filtered.filter(task =>
-                moment(task.start_date).isSameOrAfter(moment(selectedDate), 'day')
-            );
-        }
-
-        if (group) {
-            filtered = filtered.filter(task => parseInt(task.group_id, 10) === parseInt(group.id, 10));
-        }
-
-        setFilteredTasks(filtered);
-    };
-
     const handleSelectTask = (taskId) => {
         if (selectedTasks.includes(taskId)) {
             setSelectedTasks(selectedTasks.filter(id => id !== taskId));
@@ -154,19 +111,14 @@ const TaskPage = () => {
 
     return (
         <div className="task-page">
-            <CommonControls
-                searchTerm={searchTerm}
-                handleSearch={handleSearch}
+            <TaskControls
+                tasks={tasks}
+                setFilteredTasks={setFilteredTasks}
                 handleSelectAll={handleSelectAllTasks}
                 handleDeleteMultiple={handleDeleteMultipleTasks}
                 handleNewItem={handleNewTask}
                 selectedItemsCount={selectedTasks.length}
                 totalItemsCount={filteredTasks.length}
-                type="task"
-                startDateFilter={startDateFilter}
-                handleDateFilter={handleDateFilter}
-                selectedGroup={selectedGroup}
-                handleGroupFilter={handleGroupFilter}
             />
             <Table className="task-table" hover>
                 <thead>

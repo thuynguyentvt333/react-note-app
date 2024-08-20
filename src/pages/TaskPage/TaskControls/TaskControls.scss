@@ -1,0 +1,56 @@
+.task-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .controls-left {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .delete-multiple-button {
+            margin-left: 10px;
+        }
+    }
+
+    .controls-right {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .search-bar {
+            margin-right: 3px;
+            display: flex;
+
+            input {
+                border-radius: 0;
+                border-right: 0;
+            }
+
+            button {
+                border-radius: 0;
+            }
+        }
+
+        .new-item-button {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .date-filter {
+            width: 140px;
+        }
+
+        .group-filter-dropdown, .priority-filter-dropdown {
+            margin-right: 2px;
+        }
+    }
+}

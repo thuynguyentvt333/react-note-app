@@ -6,19 +6,17 @@ import { FaSort, FaEdit, FaTrash } from 'react-icons/fa';
 import NoteModal from './NoteModal/NoteModal';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import './NotePage.scss';
-import CommonControls from '../../components/CommonControls/CommonControls';
+import NoteControls from './NoteControls/NoteControls';
 
 const NotePage = () => {
     const { user } = useContext(AuthContext);
     const [notes, setNotes] = useState([]);
     const [filteredNotes, setFilteredNotes] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
     const [selectedNotes, setSelectedNotes] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [deleteMultiple, setDeleteMultiple] = useState(false);
     const [selectedNote, setSelectedNote] = useState(null);
-    const [selectedGroup, setSelectedGroup] = useState(null);
 
     useEffect(() => {
         if (user) {
@@ -74,42 +72,6 @@ const NotePage = () => {
         }
     };
 
-    const handleSave = () => {
-        fetchNotes();
-    };
-
-    const handleNewNote = () => {
-        setSelectedNote(null);
-        setModalOpen(true);
-    };
-
-    const handleSearch = (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        setSearchTerm(searchTerm);
-        filterNotes(searchTerm, selectedGroup);
-    };
-
-    const handleGroupFilter = (group) => {
-        setSelectedGroup(group);
-        filterNotes(searchTerm, group);
-    };
-
-    const filterNotes = (searchTerm, group) => {
-        let filtered = notes;
-
-        if (searchTerm) {
-            filtered = filtered.filter(note =>
-                note.title.toLowerCase().includes(searchTerm)
-            );
-        }
-
-        if (group) {
-            filtered = filtered.filter(note => (parseInt(note.group_id, 10) === parseInt(group.id, 10)));
-        }
-
-        setFilteredNotes(filtered);
-    };
-
     const handleSelectNote = (noteId) => {
         if (selectedNotes.includes(noteId)) {
             setSelectedNotes(selectedNotes.filter(id => id !== noteId));
@@ -133,17 +95,14 @@ const NotePage = () => {
 
     return (
         <div className="note-page">
-            <CommonControls
-                searchTerm={searchTerm}
-                handleSearch={handleSearch}
+            <NoteControls
+                notes={notes}
+                setFilteredNotes={setFilteredNotes}
                 handleSelectAll={handleSelectAllNotes}
                 handleDeleteMultiple={handleDeleteMultipleNotes}
-                handleNewItem={handleNewNote}
+                handleNewItem={() => setModalOpen(true)}
                 selectedItemsCount={selectedNotes.length}
                 totalItemsCount={filteredNotes.length}
-                type="note"
-                selectedGroup={selectedGroup}
-                handleGroupFilter={handleGroupFilter}
             />
             <Table className="note-table" hover>
                 <thead>
@@ -180,7 +139,7 @@ const NotePage = () => {
                 isOpen={modalOpen}
                 toggle={toggleModal}
                 note={selectedNote}
-                onSave={handleSave}
+                onSave={fetchNotes}
                 accountId={user?.id}
             />
 
