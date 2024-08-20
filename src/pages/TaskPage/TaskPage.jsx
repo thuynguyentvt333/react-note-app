@@ -8,16 +8,20 @@ import DeleteConfirmationModal from './DeleteConfirmationModal';
 import './TaskPage.scss';
 import { useNavigate } from 'react-router-dom';
 import TaskControls from './TaskControls/TaskControls';
+import PaginationControls from '../../components/PaginationControls/PaginationControls';
 
 const TaskPage = () => {
     const { user } = useContext(AuthContext);
     const [tasks, setTasks] = useState([]);
     const [filteredTasks, setFilteredTasks] = useState([]);
+    const [paginatedTasks, setPaginatedTasks] = useState([]);
     const [selectedTasks, setSelectedTasks] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [deleteMultiple, setDeleteMultiple] = useState(false);
     const [selectedTask, setSelectedTask] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(2);
     const navigate = useNavigate();
 
     const statusMap = {
@@ -36,7 +40,7 @@ const TaskPage = () => {
         axios.get(`http://localhost:5000/tasks?account_id=${user.id}`)
             .then(response => {
                 setTasks(response.data);
-                setFilteredTasks(response.data);
+                setFilteredTasks(response.data); // Initialize with all tasks
             })
             .catch(error => {
                 console.error('Error fetching tasks:', error);
@@ -97,10 +101,10 @@ const TaskPage = () => {
     };
 
     const handleSelectAllTasks = () => {
-        if (selectedTasks.length === filteredTasks.length) {
+        if (selectedTasks.length === paginatedTasks.length) {
             setSelectedTasks([]);
         } else {
-            setSelectedTasks(filteredTasks.map(task => task.id));
+            setSelectedTasks(paginatedTasks.map(task => task.id));
         }
     };
 
@@ -123,7 +127,7 @@ const TaskPage = () => {
             <Table className="task-table" hover>
                 <thead>
                     <tr>
-                        <th><input type="checkbox" onChange={handleSelectAllTasks} checked={selectedTasks.length === filteredTasks.length} /></th>
+                        <th><input type="checkbox" onChange={handleSelectAllTasks} checked={selectedTasks.length === paginatedTasks.length} /></th>
                         <th>Status <FaSort /></th>
                         <th>Task Name <FaSort /></th>
                         <th>Description <FaSort /></th>
@@ -132,7 +136,7 @@ const TaskPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredTasks.map(task => (
+                    {paginatedTasks.map(task => (
                         <tr key={task.id}>
                             <td><input type="checkbox" checked={selectedTasks.includes(task.id)} onChange={(e) => { e.stopPropagation(); handleSelectTask(task.id); }} /></td>
                             <td onClick={() => handleViewTask(task)} style={{ cursor: 'pointer' }}>{statusMap[task.status_id]}</td>
@@ -155,6 +159,14 @@ const TaskPage = () => {
                     ))}
                 </tbody>
             </Table>
+            <PaginationControls
+                data={filteredTasks}
+                pageSize={pageSize}
+                setPageSize={setPageSize}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                setPaginatedData={setPaginatedTasks}
+            />
             <div className="task-footer">
                 <span>Count {filteredTasks.length}</span>
             </div>
