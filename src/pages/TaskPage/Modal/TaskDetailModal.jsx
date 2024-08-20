@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import './TaskDetailModal.scss';
 
 const TaskDetailModal = ({ isOpen, toggle, task }) => {
     return (

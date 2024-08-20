@@ -3,7 +3,7 @@ import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Table, Button } from 'reactstrap';
 import { FaSort, FaTrash, FaEdit } from 'react-icons/fa';
-import TaskDetailModal from './TaskDetailModal';
+import TaskDetailModal from './Modal/TaskDetailModal';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import './TaskPage.scss';
 import { useNavigate } from 'react-router-dom';
