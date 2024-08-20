@@ -5,6 +5,7 @@ import { Table, Button } from 'reactstrap';
 import { FaSort, FaEdit, FaTrash } from 'react-icons/fa';
 import NoteModal from './NoteModal/NoteModal';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
+import NoteDetailModal from './NoteDetailModal';
 import './NotePage.scss';
 import NoteControls from './NoteControls/NoteControls';
 import PaginationControls from '../../components/PaginationControls/PaginationControls';
@@ -17,6 +18,7 @@ const NotePage = () => {
     const [selectedNotes, setSelectedNotes] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [detailModalOpen, setDetailModalOpen] = useState(false);
     const [deleteMultiple, setDeleteMultiple] = useState(false);
     const [selectedNote, setSelectedNote] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
@@ -41,6 +43,7 @@ const NotePage = () => {
 
     const toggleModal = () => setModalOpen(!modalOpen);
     const toggleDeleteModal = () => setDeleteModalOpen(!deleteModalOpen);
+    const toggleDetailModal = () => setDetailModalOpen(!detailModalOpen);
 
     const handleEditNote = (note) => {
         setSelectedNote(note);
@@ -97,6 +100,11 @@ const NotePage = () => {
         setDeleteModalOpen(true);
     };
 
+    const handleViewNoteDetails = (note) => {
+        setSelectedNote(note);
+        toggleDetailModal();
+    };
+
     return (
         <div className="note-page">
             <NoteControls
@@ -119,15 +127,15 @@ const NotePage = () => {
                 </thead>
                 <tbody>
                     {paginatedNotes.map(note => (
-                        <tr key={note.id}>
+                        <tr key={note.id} onClick={() => handleViewNoteDetails(note)} style={{ cursor: 'pointer' }}>
                             <td><input type="checkbox" checked={selectedNotes.includes(note.id)} onChange={() => handleSelectNote(note.id)} /></td>
                             <td>{note.title}</td>
                             <td>{note.content}</td>
                             <td>
-                                <Button size="sm" color="info" className="action-button" onClick={() => handleEditNote(note)}>
+                                <Button size="sm" color="info" className="action-button" onClick={(e) => { e.stopPropagation(); handleEditNote(note); }}>
                                     <FaEdit />
                                 </Button>
-                                <Button size="sm" color="danger" className="action-button" onClick={() => handleDeleteNote(note)}>
+                                <Button size="sm" color="danger" className="action-button" onClick={(e) => { e.stopPropagation(); handleDeleteNote(note); }}>
                                     <FaTrash />
                                 </Button>
                             </td>
@@ -161,6 +169,12 @@ const NotePage = () => {
                 onConfirm={confirmDeleteNote}
                 note={selectedNote}
                 multiple={deleteMultiple}
+            />
+
+            <NoteDetailModal
+                isOpen={detailModalOpen}
+                toggle={toggleDetailModal}
+                note={selectedNote}
             />
         </div>
     );
