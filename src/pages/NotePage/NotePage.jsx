@@ -130,10 +130,20 @@ const NotePage = () => {
                 </thead>
                 <tbody>
                     {paginatedNotes.map(note => (
-                        <tr key={note.id} onClick={() => handleViewNoteDetails(note)} style={{ cursor: 'pointer' }}>
-                            <td><input type="checkbox" checked={selectedNotes.includes(note.id)} onChange={() => handleSelectNote(note.id)} /></td>
-                            <td>{note.title}</td>
-                            <td>{note.content}</td>
+                        <tr key={note.id} style={{ cursor: 'pointer' }}>
+                            <td>
+                                <input 
+                                    type="checkbox" 
+                                    checked={selectedNotes.includes(note.id)} 
+                                    onChange={(e) => { 
+                                        e.stopPropagation();
+                                        handleSelectNote(note.id); 
+                                    }} 
+                                    onClick={(e) => e.stopPropagation()}
+                                />
+                            </td>
+                            <td onClick={() => handleViewNoteDetails(note)}>{note.title}</td>
+                            <td onClick={() => handleViewNoteDetails(note)}>{note.content}</td>
                             <td>
                                 <Button size="sm" color="info" className="action-button" onClick={(e) => { e.stopPropagation(); handleEditNote(note); }}>
                                     <FaEdit />
