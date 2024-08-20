@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Home from '../pages/Home';
+import Home from '../pages/HomePage/Home';
 import NotFound from '../pages/NotFound';
 import PrivateLayout from '../layouts/PrivateLayout';
 import TaskPage from '../pages/TaskPage/TaskPage';

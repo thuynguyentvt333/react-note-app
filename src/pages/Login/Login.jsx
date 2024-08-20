@@ -45,7 +45,7 @@ const Login = () =>  {
 
       if (passwordMatch) {
         login(user);
-        navigate('/app/home');
+        navigate('/app');
       } else {
         setError('Invalid email or password');
         setSuccess('');
