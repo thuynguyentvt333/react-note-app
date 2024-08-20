@@ -13,7 +13,6 @@ const FormTask = ({ task }) => {
     const [statusId, setStatusId] = useState(1);
     const [priorityId, setPriorityId] = useState(1);
     const [groupId, setGroupId] = useState('');
-    const [parentId, setParentId] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [startTime, setStartTime] = useState('');
@@ -37,7 +36,6 @@ const FormTask = ({ task }) => {
             setStatusId(task.status_id);
             setPriorityId(task.priority_id);
             setGroupId(task.group_id || '');
-            setParentId(task.parent_id || '');
             setStartDate(task.start_date);
             setEndDate(task.end_date);
             setStartTime(task.start_time);
@@ -54,7 +52,6 @@ const FormTask = ({ task }) => {
             status_id: statusId,
             priority_id: priorityId,
             group_id: parseInt(groupId, 10) || null,
-            parent_id: parentId || null,
             start_date: startDate,
             end_date: endDate,
             start_time: startTime,
@@ -74,7 +71,6 @@ const FormTask = ({ task }) => {
                 const existingTasks = response.data;
                 const maxId = existingTasks.length > 0 ? Math.max(...existingTasks.map(t => t.id)) : 0;
 
-                // Tạo task mới với id mới
                 const newTask = { ...taskData, id: maxId + 1 };
                 
                 axios.post('http://localhost:5000/tasks', newTask)
@@ -136,31 +132,25 @@ const FormTask = ({ task }) => {
             <Row>
                 <Col md={6}>
                     <FormGroup>
-                        <Label for="parentTask">Parent Task</Label>
-                        <Input type="text" id="parentTask" value={parentId} onChange={(e) => setParentId(e.target.value)} />
-                    </FormGroup>
-                </Col>
-                <Col md={6}>
-                    <FormGroup>
                         <Label for="startDate">Start Date</Label>
                         <Input type="date" id="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} required />
                     </FormGroup>
                 </Col>
-            </Row>
-            <Row>
                 <Col md={6}>
                     <FormGroup>
                         <Label for="endDate">End Date</Label>
                         <Input type="date" id="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} required />
                     </FormGroup>
                 </Col>
-                <Col md={3}>
+            </Row>
+            <Row>
+                <Col md={6}>
                     <FormGroup>
                         <Label for="startTime">Start Time</Label>
                         <Input type="time" id="startTime" value={startTime} onChange={(e) => setStartTime(e.target.value)} required />
                     </FormGroup>
                 </Col>
-                <Col md={3}>
+                <Col md={6}>
                     <FormGroup>
                         <Label for="endTime">End Time</Label>
                         <Input type="time" id="endTime" value={endTime} onChange={(e) => setEndTime(e.target.value)} required />
