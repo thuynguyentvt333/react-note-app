@@ -55,7 +55,12 @@ const FormTask = ({ task }) => {
 
                 // cùng ngày
                 if (moment(startDate).isSame(endDate)) {
-                    if (startTime && endTime && moment(endTime, 'HH:mm').isBefore(moment(startTime, 'HH:mm'))) {
+                    if (
+                        startTime &&
+                        endTime &&
+                        (moment(endTime, 'HH:mm').isBefore(moment(startTime, 'HH:mm')) ||
+                        moment(endTime, 'HH:mm').isSame(moment(startTime, 'HH:mm')))
+                    ) {
                         setTimeError('End time must be after the start time.');
                     } else {
                         setTimeError('');
