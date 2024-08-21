@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
+    margin: 0;
     background-color: #f5f5f5;
     font-family: Arial, sans-serif;
 
@@ -26,7 +27,7 @@
             font-size: 16px;
             display: flex;
             align-items: center;
-            padding-top: 15px;
+            margin-bottom: 0;
 
             a {
                 text-decoration: none;

@@ -22,6 +22,39 @@ const PaginationControls = ({ data, pageSize, setPageSize, currentPage, setCurre
         setCurrentPage(1);
     };
 
+    const renderPageNumbers = () => {
+        const pageNumbers = [];
+
+        if (totalPages <= 7) {
+            // nếu ít hơn 7 trang ==> hiển thị tất cả
+            for (let i = 1; i <= totalPages; i++) {
+                pageNumbers.push(i);
+            }
+        } else {
+            // hiển thị 2 trang đầu, 2 trang cuối, 3 trang ở giữa
+            pageNumbers.push(1, 2);
+
+            if (currentPage > 4) {
+                pageNumbers.push('...');
+            }
+
+            const startPage = Math.max(3, currentPage - 1);
+            const endPage = Math.min(totalPages - 2, currentPage + 1);
+
+            for (let i = startPage; i <= endPage; i++) {
+                pageNumbers.push(i);
+            }
+
+            if (currentPage < totalPages - 3) {
+                pageNumbers.push('...');
+            }
+
+            pageNumbers.push(totalPages - 1, totalPages);
+        }
+
+        return pageNumbers;
+    };
+
     return (
         <div className="pagination-controls">
             <div className="pagination-buttons">
@@ -32,13 +65,14 @@ const PaginationControls = ({ data, pageSize, setPageSize, currentPage, setCurre
                 >
                     &lt;
                 </button>
-                {[...Array(totalPages)].map((_, index) => (
+                {renderPageNumbers().map((page, index) => (
                     <button
                         key={index}
-                        className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
-                        onClick={() => handlePageChange(index + 1)}
+                        className={`pagination-button ${page === currentPage ? 'active' : ''}`}
+                        onClick={() => typeof page === 'number' && handlePageChange(page)}
+                        disabled={typeof page !== 'number'}
                     >
-                        {index + 1}
+                        {page}
                     </button>
                 ))}
                 <button
