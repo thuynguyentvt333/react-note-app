@@ -130,7 +130,7 @@ const TaskControls = ({
                 </Button>
                 {selectedItemsCount > 0 && (
                     <Button color="danger" className="delete-multiple-button" onClick={handleDeleteMultiple}>
-                        <FaTrash /> Delete Selected
+                        <FaTrash /> Selected
                     </Button>
                 )}
             </div>
