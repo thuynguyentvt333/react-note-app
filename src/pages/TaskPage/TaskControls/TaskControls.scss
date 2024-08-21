@@ -52,5 +52,12 @@
         .group-filter-dropdown, .priority-filter-dropdown {
             margin-right: 2px;
         }
+
+        .group-filter-dropdown {
+            .dropdown-menu {
+                max-height: 300px;
+                overflow-y: auto;
+            }
+        }
     }
 }
