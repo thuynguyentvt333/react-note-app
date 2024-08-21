@@ -1,0 +1,46 @@
+.task-upcoming-container {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .task-reminder {
+      background-color: #ffedc2;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #ffdb92;
+      }
+
+      .task-info {
+        .task-title {
+          font-size: 1.2rem;
+          font-weight: bold;
+          color: #333;
+        }
+
+        .task-deadline {
+          font-size: 1rem;
+          color: #555;
+        }
+      }
+
+      button {
+        margin-left: 10px;
+      }
+    }
+  }
+}
