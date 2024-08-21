@@ -11,6 +11,7 @@ const GroupPage = () => {
     const { user } = useContext(AuthContext);
     const [groups, setGroups] = useState([]);
     const [filteredGroups, setFilteredGroups] = useState([]);
+    const [groupStats, setGroupStats] = useState({});
     const [searchTerm, setSearchTerm] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -18,19 +19,48 @@ const GroupPage = () => {
 
     useEffect(() => {
         if (user) {
-            fetchGroups();
+            fetchGroupsAndStats();
         }
     }, [user]);
 
-    const fetchGroups = () => {
-        axios.get(`http://localhost:5000/groups?account_id=${user.id}`)
-            .then(response => {
-                setGroups(response.data);
-                setFilteredGroups(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching groups:', error);
-            });
+    const fetchGroupsAndStats = async () => {
+        try {
+            const groupsResponse = await axios.get(`http://localhost:5000/groups?account_id=${user.id}`);
+            const tasksResponse = await axios.get(`http://localhost:5000/tasks?account_id=${user.id}`);
+            const notesResponse = await axios.get(`http://localhost:5000/notes?account_id=${user.id}`);
+
+            const groups = groupsResponse.data.map(group => ({
+                ...group,
+                id: Number(group.id)
+            }));
+            const tasks = tasksResponse.data.map(task => ({
+                ...task,
+                group_id: Number(task.group_id),
+                status_id: Number(task.status_id)
+            }));
+            const notes = notesResponse.data.map(note => ({
+                ...note,
+                group_id: Number(note.group_id)
+            }));
+
+            setGroups(groups);
+            setFilteredGroups(groups);
+
+            // tính toán số lượng task và note cho từng group
+            const stats = groups.reduce((acc, group) => {
+                const taskCount = tasks.filter(
+                    task => task.group_id === group.id
+                ).length;
+                const noteCount = notes.filter(note => note.group_id === group.id).length;
+
+                acc[group.id] = { taskCount, noteCount };
+                return acc;
+            }, {});
+
+            setGroupStats(stats);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     };
 
     const toggleModal = () => setModalOpen(!modalOpen);
@@ -54,7 +84,7 @@ const GroupPage = () => {
     const confirmDeleteGroup = () => {
         axios.delete(`http://localhost:5000/groups/${selectedGroup.id}`)
             .then(() => {
-                fetchGroups();
+                fetchGroupsAndStats();
                 toggleDeleteModal();
             })
             .catch(error => {
@@ -63,7 +93,7 @@ const GroupPage = () => {
     };
 
     const handleSave = () => {
-        fetchGroups();
+        fetchGroupsAndStats();
     };
 
     const handleSearch = (e) => {
@@ -113,7 +143,14 @@ const GroupPage = () => {
                 <tbody>
                     {filteredGroups.map(group => (
                         <tr key={group.id}>
-                            <td>{group.name}</td>
+                            <td>
+                                {group.name} 
+                                {groupStats[group.id] && (
+                                    <span className="group-stats">
+                                        (Tasks: {groupStats[group.id].taskCount}, Notes: {groupStats[group.id].noteCount})
+                                    </span>
+                                )}
+                            </td>
                             <td>
                                 <Button size="sm" color="info" className="action-button" onClick={() => handleEditGroup(group)}>
                                     <FaEdit />
