@@ -63,7 +63,7 @@ const TaskControls = ({
 
         if (searchTerm) {
             filtered = filtered.filter(task =>
-                task.title.toLowerCase().includes(searchTerm)
+                task.title && typeof task.title === 'string' && task.title.toLowerCase().includes(searchTerm)
             );
         }
 
