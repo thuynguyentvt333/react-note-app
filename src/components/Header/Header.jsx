@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import UserDropdown from '../UserDropdown/UserDropdown';
 import './Header.scss';
@@ -13,7 +13,7 @@ const Header = () => {
         const routeTo = `/${breadcrumbPaths.slice(0, index + 1).join('/')}`;
         return (
             <span key={routeTo}>
-                <a href={routeTo}>{path.replace(/-/g, ' ')}</a>
+                <Link to={routeTo}>{path.replace(/-/g, ' ')}</Link>
                 {index < breadcrumbPaths.length - 1 && ' / '}
             </span>
         );
@@ -21,13 +21,13 @@ const Header = () => {
 
     return (
         <header className="header">
-            <div className='left'>
+            <div className='header-left'>
                 <div className="nav-icons">
                     <FaArrowLeft onClick={() => navigate(-1)} aria-label="Go Back" className='icon-arrow' />
                     <FaArrowRight onClick={() => navigate(1)} aria-label="Go Forward" className='icon-arrow' />
                 </div>
                 <div className="breadcrumb">
-                    <a href="/">Home</a>
+                    <Link to="/">Home</Link>
                     {breadcrumbPaths.length > 0 && ' / '}
                     {breadcrumb}
                 </div>
