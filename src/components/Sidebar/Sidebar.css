@@ -1,10 +1,11 @@
 .sidebar {
-    width: 200px;
-    background-color: #333;
+    width: 220px;
+    background-color: #282c34;
     color: white;
     padding: 20px;
     display: flex;
     flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar ul {
@@ -17,23 +18,54 @@
     margin: 15px 0;
 }
 
-.sidebar a, .logout-button {
+.sidebar a,
+.logout-button {
     color: white;
     text-decoration: none;
     display: flex;
     align-items: center;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.sidebar a:hover,
+.logout-button:hover {
+    background-color: #3a3f47;
+    color: #ffffff;
+}
+
+.sidebar a svg,
+.logout-button svg {
+    margin-right: 12px;
+    font-size: 18px;
+}
+
+.sidebar .logout-button {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0;
-    width: 100%;
     text-align: left;
+    width: 100%;
+    font-size: 16px;
+    margin-top: auto;
 }
 
-.sidebar a:hover, .logout-button:hover {
-    color: #ddd;
+.sidebar-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #61dafb;
 }
 
-.sidebar a svg, .logout-button svg {
+.sidebar-title svg {
     margin-right: 10px;
+    font-size: 24px;
+}
+
+.sidebar li.active a {
+    background-color: #61dafb;
+    color: #282c34;
 }

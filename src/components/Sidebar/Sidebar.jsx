@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaHome, FaInfoCircle, FaStickyNote, FaTasks, FaCog, FaUser, FaSignOutAlt, FaLayerGroup } from 'react-icons/fa';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { FaHome, FaStickyNote, FaTasks, FaSignOutAlt, FaLayerGroup, FaBars } from 'react-icons/fa';
 import { AuthContext } from '../../contexts/AuthContext';
 import './Sidebar.css';
 
 const Sidebar = () => {
-    const { user, logout } = useContext(AuthContext);
+    const { logout } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleLogout = () => {
         logout();
@@ -15,24 +16,27 @@ const Sidebar = () => {
 
     return (
         <aside className="sidebar">
+            <div className="sidebar-title">
+                <FaBars /> Menu
+            </div>
             <nav>
                 <ul>
-                    <li>
+                    <li className={location.pathname === '/app' ? 'active' : ''}>
                         <Link to="/app">
                             <FaHome /> Home
                         </Link>
                     </li>
-                    <li>
+                    <li className={location.pathname === '/app/group' ? 'active' : ''}>
                         <Link to="/app/group">
                             <FaLayerGroup /> Group
                         </Link>
                     </li>
-                    <li>
+                    <li className={location.pathname === '/app/notes' ? 'active' : ''}>
                         <Link to="/app/notes">
                             <FaStickyNote /> Note
                         </Link>
                     </li>
-                    <li>
+                    <li className={location.pathname === '/app/tasks' ? 'active' : ''}>
                         <Link to="/app/tasks">
                             <FaTasks /> Task
                         </Link>
