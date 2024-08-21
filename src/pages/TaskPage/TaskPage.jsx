@@ -9,6 +9,7 @@ import './TaskPage.scss';
 import { useNavigate } from 'react-router-dom';
 import TaskControls from './TaskControls/TaskControls';
 import PaginationControls from '../../components/PaginationControls/PaginationControls';
+import { DEFAULT_PAGE_SIZE } from '../../utils/constants'; 
 
 const TaskPage = () => {
     const { user } = useContext(AuthContext);
@@ -21,7 +22,7 @@ const TaskPage = () => {
     const [deleteMultiple, setDeleteMultiple] = useState(false);
     const [selectedTask, setSelectedTask] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(2);
+    const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
     const navigate = useNavigate();
 
     const statusMap = {

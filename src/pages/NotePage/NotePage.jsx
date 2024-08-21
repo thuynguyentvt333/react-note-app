@@ -9,6 +9,7 @@ import NoteDetailModal from './NoteDetailModal';
 import './NotePage.scss';
 import NoteControls from './NoteControls/NoteControls';
 import PaginationControls from '../../components/PaginationControls/PaginationControls';
+import { DEFAULT_PAGE_SIZE } from '../../utils/constants'; 
 
 const NotePage = () => {
     const { user } = useContext(AuthContext);
@@ -22,7 +23,7 @@ const NotePage = () => {
     const [deleteMultiple, setDeleteMultiple] = useState(false);
     const [selectedNote, setSelectedNote] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(1);
+    const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
 
     useEffect(() => {
         if (user) {

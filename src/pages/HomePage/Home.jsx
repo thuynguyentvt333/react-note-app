@@ -4,6 +4,7 @@ import moment from 'moment';
 import { AuthContext } from '../../contexts/AuthContext';
 import TaskUpcoming from './TaskUpcoming';
 import './Home.scss';
+import { UPCOMING_TASK_HOURS } from '../../utils/constants'; 
 
 const Home = () => {
   const { user } = useContext(AuthContext);
@@ -33,7 +34,7 @@ const Home = () => {
 
         const deadline = moment(`${task.end_date} ${task.end_time}`, 'YYYY-MM-DD HH:mm');
         // kiểm tra thời gian hết hạn
-        return deadline.isAfter(moment()) && deadline.diff(moment(), 'hours') <= 300;
+        return deadline.isAfter(moment()) && deadline.diff(moment(), 'hours') <= UPCOMING_TASK_HOURS;
       });
       setUpcomingTasks(upcoming);
     }
