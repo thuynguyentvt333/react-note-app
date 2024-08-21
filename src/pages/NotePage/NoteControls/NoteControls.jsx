@@ -49,9 +49,11 @@ const NoteControls = ({
         }
 
         if (selectedGroup) {
-            filtered = filtered.filter(note =>
-                parseInt(note.group_id, 10) === parseInt(selectedGroup.id, 10)
-            );
+            if (selectedGroup.id === 'no-group') {
+                filtered = filtered.filter(note => !note.group_id);
+            } else {
+                filtered = filtered.filter(note => parseInt(note.group_id, 10) === parseInt(selectedGroup.id, 10));
+            }
         }
 
         setFilteredNotes(filtered);
@@ -84,6 +86,7 @@ const NoteControls = ({
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem onClick={() => handleGroupFilter(null)}>All Groups</DropdownItem>
+                        <DropdownItem onClick={() => handleGroupFilter({ id: 'no-group', name: 'No Group' })}>No Group</DropdownItem>
                         {groups.map(group => (
                             <DropdownItem key={group.id} onClick={() => handleGroupFilter(group)}>
                                 {group.name}

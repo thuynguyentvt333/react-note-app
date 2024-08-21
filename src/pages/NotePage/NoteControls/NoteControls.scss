@@ -47,6 +47,10 @@
 
         .group-filter-dropdown {
             margin-right: 10px;
+            .dropdown-menu {
+                max-height: 300px;
+                overflow-y: auto;
+            }
         }
     }
 }
