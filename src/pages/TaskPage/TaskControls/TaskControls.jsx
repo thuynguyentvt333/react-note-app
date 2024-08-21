@@ -21,7 +21,13 @@ const TaskControls = ({
     const [endDateFilter, setEndDateFilter] = useState('');
     const [selectedGroup, setSelectedGroup] = useState(null);
     const [selectedPriority, setSelectedPriority] = useState(null);
+    const [selectedStatus, setSelectedStatus] = useState(null);
     const [groups, setGroups] = useState([]);
+    const [statuses] = useState([
+        { id: 1, name: 'Todo' },
+        { id: 2, name: 'Doing' },
+        { id: 3, name: 'Done' }
+    ]);
     const [priorities] = useState([
         { id: 1, name: 'High' },
         { id: 2, name: 'Medium' },
@@ -29,9 +35,11 @@ const TaskControls = ({
     ]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [priorityDropdownOpen, setPriorityDropdownOpen] = useState(false);
+    const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
 
     const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
     const togglePriorityDropdown = () => setPriorityDropdownOpen(!priorityDropdownOpen);
+    const toggleStatusDropdown = () => setStatusDropdownOpen(!statusDropdownOpen);
 
     useEffect(() => {
         fetchGroups();
@@ -39,7 +47,7 @@ const TaskControls = ({
 
     useEffect(() => {
         filterTasks();
-    }, [searchTerm, startDateFilter, endDateFilter, selectedGroup, selectedPriority, tasks]);
+    }, [searchTerm, startDateFilter, endDateFilter, selectedGroup, selectedPriority, selectedStatus, tasks]);
 
     const fetchGroups = async () => {
         try {
@@ -83,6 +91,10 @@ const TaskControls = ({
             filtered = filtered.filter(task => parseInt(task.priority_id, 10) === parseInt(selectedPriority.id, 10));
         }
 
+        if (selectedStatus) {
+            filtered = filtered.filter(task => parseInt(task.status_id, 10) === parseInt(selectedStatus.id, 10));
+        }
+
         setFilteredTasks(filtered);
     };
 
@@ -104,6 +116,10 @@ const TaskControls = ({
 
     const handlePriorityFilter = (priority) => {
         setSelectedPriority(priority);
+    };
+
+    const handleStatusFilter = (status) => {
+        setSelectedStatus(status);
     };
 
     return (
@@ -143,6 +159,20 @@ const TaskControls = ({
                         {priorities.map(priority => (
                             <DropdownItem key={priority.id} onClick={() => handlePriorityFilter(priority)}>
                                 {priority.name}
+                            </DropdownItem>
+                        ))}
+                    </DropdownMenu>
+                </Dropdown>
+
+                <Dropdown isOpen={statusDropdownOpen} toggle={toggleStatusDropdown} className="status-filter-dropdown">
+                    <DropdownToggle caret>
+                        {selectedStatus ? `Status: ${selectedStatus.name}` : 'Select Status'}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem onClick={() => handleStatusFilter(null)}>All Statuses</DropdownItem>
+                        {statuses.map(status => (
+                            <DropdownItem key={status.id} onClick={() => handleStatusFilter(status)}>
+                                {status.name}
                             </DropdownItem>
                         ))}
                     </DropdownMenu>
