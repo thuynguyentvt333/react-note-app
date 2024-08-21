@@ -72,7 +72,11 @@ const TaskControls = ({
         }
 
         if (selectedGroup) {
-            filtered = filtered.filter(task => parseInt(task.group_id, 10) === parseInt(selectedGroup.id, 10));
+            if (selectedGroup.id === 'no-group') {
+                filtered = filtered.filter(task => task.group_id === null);
+            } else {
+                filtered = filtered.filter(task => parseInt(task.group_id, 10) === parseInt(selectedGroup.id, 10));
+            }
         }
 
         if (selectedPriority) {
@@ -121,6 +125,7 @@ const TaskControls = ({
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem onClick={() => handleGroupFilter(null)}>All Groups</DropdownItem>
+                        <DropdownItem onClick={() => handleGroupFilter({ id: 'no-group', name: 'No Group' })}>No Group</DropdownItem>
                         {groups.map(group => (
                             <DropdownItem key={group.id} onClick={() => handleGroupFilter(group)}>
                                 {group.name}
